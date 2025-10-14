@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html class="no-js ss-preload" lang="en">
 <head>
-
     <!--- basic page needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Luther</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <title>Portfolio | Atul Kumar</title>
+    <meta name="description" content="PHP Web Developer & Cybersecurity Enthusiast">
+    <meta name="author" content="Atul Kumar">
 
     <!-- mobile specific metas
     ================================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSS
-    ================================================== -->
-    <link rel="stylesheet" href="css/vendor.css">
-    <link rel="stylesheet" href="css/styles.css">
 
     <!-- favicons
     ================================================== -->
@@ -25,631 +19,2442 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ===================================================================
+         *  Global Styles & Variables
+         * =================================================================== */
+        :root {
+            /* Colors */
+            --color-bg: #0a0a0a;
+            --color-bg-alt: #121212;
+            --color-bg-section: #1a1a1a;
+            --color-text: #e0e0e0;
+            --color-text-secondary: #a0a0a0;
+            --color-accent: #e60023; /* Pin Red */
+            --color-accent-hover: #ff0844;
+            --color-border: #2a2a2a;
+            --color-card: #161616;
+            --color-code-bg: #0d1117;
+            --color-code-text: #58a6ff;
+            
+            /* Fonts */
+            --font-primary: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-display: 'Space Grotesk', sans-serif;
+            
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 3rem;
+            --spacing-xl: 5rem;
+            
+            /* Transitions */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 62.5%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-primary);
+            font-size: 1.6rem;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text);
+        }
+
+        h1 {
+            font-size: clamp(3.2rem, 8vw, 6.4rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(2.8rem, 5vw, 4.8rem);
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+        }
+
+        h3 {
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text-secondary);
+        }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--color-accent-hover);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-primary);
+            font-weight: 600;
+            font-size: 1.6rem;
+            text-align: center;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 1.2rem 2.4rem;
+            border-radius: 0.4rem;
+            background-color: var(--color-accent);
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background-color: var(--color-accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(230, 0, 35, 0.3);
+        }
+
+        .btn--outline {
+            background-color: transparent;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+        }
+
+        .btn--outline:hover {
+            background-color: var(--color-accent);
+            color: #ffffff;
+        }
+
+        .btn--small {
+            padding: 0.8rem 1.6rem;
+            font-size: 1.4rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        .container-wide {
+            max-width: 1400px;
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            gap: var(--spacing-md);
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: var(--spacing-xl) 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-accent);
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-bg);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--color-accent);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Header/Navbar */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: var(--spacing-sm) 0;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            background-color: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--color-text);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo span {
+            color: var(--color-accent);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: var(--spacing-md);
+        }
+
+        .nav-link {
+            font-family: var(--font-primary);
+            font-weight: 500;
+            font-size: 1.6rem;
+            color: var(--color-text);
+            text-decoration: none;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-accent);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--color-text);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-mono);
+            font-size: 1.8rem;
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-sm);
+            display: inline-block;
+        }
+
+        .hero-title {
+            margin-bottom: var(--spacing-md);
+            line-height: 1.1;
+        }
+
+        .hero-title .highlight {
+            color: var(--color-accent);
+            position: relative;
+        }
+
+        .hero-title .highlight::after {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: rgba(230, 0, 35, 0.2);
+            z-index: -1;
+        }
+
+        .hero-description {
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-lg);
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .hero-social {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .hero-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--color-text);
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .hero-social a:hover {
+            background-color: var(--color-accent);
+            color: #ffffff;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 1/1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-image-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--color-accent);
+            border-radius: 20px;
+            top: 20px;
+            left: 20px;
+            z-index: -1;
+        }
+
+        .terminal {
+            position: absolute;
+            bottom: 30px;
+            right: -50px;
+            width: 200px;
+            background-color: var(--color-code-bg);
+            border-radius: 10px;
+            padding: var(--spacing-sm);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: rotate(5deg);
+            z-index: 3;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        .terminal-dot:nth-child(1) {
+            background-color: #ff5f56;
+        }
+
+        .terminal-dot:nth-child(2) {
+            background-color: #ffbd2e;
+        }
+
+        .terminal-dot:nth-child(3) {
+            background-color: #27c93f;
+        }
+
+        .terminal-body {
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+            color: var(--color-code-text);
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.6rem;
+            background-color: var(--color-code-text);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--color-bg-alt);
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-content h2 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .about-text {
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .skill {
+            padding: 0.5rem 1rem;
+            background-color: rgba(230, 0, 35, 0.1);
+            border: 1px solid var(--color-accent);
+            border-radius: 50px;
+            font-size: 1.4rem;
+            color: var(--color-text);
+        }
+
+        /* Projects Section */
+        .projects {
+            background-color: var(--color-bg);
+        }
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .project-card {
+            background-color: var(--color-card);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: var(--spacing-md);
+        }
+
+        .project-title {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .project-description {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .tech-tag {
+            padding: 0.3rem 0.8rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            font-size: 1.2rem;
+            color: var(--color-text-secondary);
+        }
+
+        .project-links {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: 1.4rem;
+            color: var(--color-accent);
+        }
+
+        /* Services Section - Enhanced with animations */
+        .services {
+            background-color: #000000;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.9) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.9) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 0;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-title {
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: var(--color-text);
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .services-title::before {
+            content: "<";
+            position: absolute;
+            left: calc(50% - 150px);
+            color: var(--color-accent);
+            font-family: var(--font-mono);
+            animation: blink 2s infinite;
+        }
+
+        .services-title::after {
+            content: "/>";
+            position: absolute;
+            right: calc(50% - 150px);
+            color: var(--color-accent);
+            font-family: var(--font-mono);
+            animation: blink 2s infinite;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .service-item {
+            background-color: rgba(26, 26, 26, 0.7);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(230, 0, 35, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .service-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(230, 0, 35, 0.1) 0%, rgba(230, 0, 35, 0) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .service-item:hover::before {
+            opacity: 1;
+        }
+
+        .service-item::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(230, 0, 35, 0.2) 0%, rgba(230, 0, 35, 0) 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        .service-item:hover::after {
+            opacity: 1;
+        }
+
+        .service-item:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(230, 0, 35, 0.3);
+            border-color: rgba(230, 0, 35, 0.5);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(230, 0, 35, 0.1);
+            border-radius: 50%;
+            font-size: 36px;
+            color: var(--color-accent);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-icon::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background-color: var(--color-accent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .service-item:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 20px rgba(230, 0, 35, 0.4);
+        }
+
+        .service-item:hover .service-icon::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .service-item:hover .service-icon i {
+            color: #ffffff;
+            transform: scale(0.9);
+        }
+
+        .service-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--color-text);
+            position: relative;
+            display: inline-block;
+        }
+
+        .service-title::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .service-item:hover .service-title::after {
+            width: 100%;
+        }
+
+        .service-description {
+            font-size: 1.4rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.5;
+            min-height: 60px;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            font-size: 1.4rem;
+            color: var(--color-accent);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-link::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--color-accent);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .service-link:hover::before {
+            transform: translateX(0);
+        }
+
+        .service-link:hover {
+            color: var(--color-accent-hover);
+        }
+
+        .service-link i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .service-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Glitch effect for service items */
+        .service-item:hover .service-icon {
+            animation: glitch 0.3s infinite;
+        }
+
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+            }
+            20% {
+                transform: translate(-2px, 2px);
+            }
+            40% {
+                transform: translate(-2px, -2px);
+            }
+            60% {
+                transform: translate(2px, 2px);
+            }
+            80% {
+                transform: translate(2px, -2px);
+            }
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        /* Code decoration for services */
+        .service-code {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: rgba(230, 0, 35, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-item:hover .service-code {
+            opacity: 1;
+        }
+
+        /* Contact Section - Modified to match the screenshot */
+        .contact {
+            background-color: var(--color-bg);
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            color: var(--color-text);
+        }
+
+        .contact-message {
+            font-family: var(--font-primary);
+            font-size: 2.2rem;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            color: var(--color-text-secondary);
+        }
+
+        .contact-info-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 60px;
+        }
+
+        .contact-info-section {
+            flex: 1;
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        .contact-info-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--color-text);
+            letter-spacing: 1px;
+        }
+
+        .contact-info-item {
+            margin-bottom: 15px;
+            font-family: var(--font-primary);
+            font-size: 1.6rem;
+            color: var(--color-text-secondary);
+        }
+
+        .contact-info-item a {
+            color: var(--color-text-secondary);
+            transition: var(--transition);
+        }
+
+        .contact-info-item a:hover {
+            color: var(--color-accent);
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--color-text);
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--color-accent);
+            color: #ffffff;
+            transform: translateY(-3px);
+        }
+
+        .contact-button {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 15px 30px;
+            background-color: transparent;
+            color: var(--color-text);
+            border: 2px solid var(--color-text);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .contact-button:hover {
+            background-color: var(--color-text);
+            color: var(--color-bg);
+        }
+
+        .copyright {
+            font-family: var(--font-primary);
+            font-size: 1.4rem;
+            color: var(--color-text-secondary);
+            margin-top: 40px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--color-bg-alt);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--color-text);
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background-color: var(--color-accent);
+            color: #ffffff;
+            transform: translateY(-3px);
+        }
+
+        .footer-copyright {
+            font-size: 1.4rem;
+            color: var(--color-text-secondary);
+        }
+
+        .footer-copyright a {
+            color: var(--color-accent);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-accent);
+            color: #ffffff;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--color-accent-hover);
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Service Modal - Enhanced */
+        .service-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        .service-modal-content {
+            background-color: var(--color-bg-alt);
+            margin: 50px auto;
+            padding: 40px;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+            position: relative;
+            border: 1px solid rgba(230, 0, 35, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            animation: modalFadeIn 0.5s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: var(--color-text);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .close-modal:hover {
+            color: var(--color-accent);
+            background-color: rgba(230, 0, 35, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .modal-service-title {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--color-text);
+            position: relative;
+            display: inline-block;
+        }
+
+        .modal-service-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-accent);
+        }
+
+        .modal-service-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-service-image:hover {
+            transform: scale(1.02);
+        }
+
+        .modal-service-description {
+            font-size: 1.6rem;
+            line-height: 1.6;
+            color: var(--color-text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .modal-service-features {
+            margin-bottom: 30px;
+        }
+
+        .modal-service-features h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--color-text);
+            position: relative;
+            display: inline-block;
+        }
+
+        .modal-service-features h3::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--color-accent);
+        }
+
+        .modal-service-features ul {
+            list-style-type: none;
+        }
+
+        .modal-service-features li {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-service-features li:hover {
+            transform: translateX(10px);
+        }
+
+        .modal-service-features li i {
+            color: var(--color-accent);
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-service-features li:hover i {
+            transform: scale(1.2);
+        }
+
+        .modal-service-contact {
+            text-align: center;
+        }
+
+        .modal-service-contact p {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--color-text-secondary);
+        }
+
+        /* Code snippet decoration */
+        .code-snippet {
+            background-color: var(--color-code-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: var(--font-mono);
+            font-size: 1.4rem;
+            color: var(--color-code-text);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-snippet::before {
+            content: "// Service Details";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Terminal window decoration */
+        .terminal-window {
+            background-color: var(--color-code-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .terminal-header {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        .terminal-dot:nth-child(1) {
+            background-color: #ff5f56;
+        }
+
+        .terminal-dot:nth-child(2) {
+            background-color: #ffbd2e;
+        }
+
+        .terminal-dot:nth-child(3) {
+            background-color: #27c93f;
+        }
+
+        .terminal-body {
+            padding: 15px;
+            font-family: var(--font-mono);
+            font-size: 1.4rem;
+            color: var(--color-code-text);
+        }
+
+        .terminal-command {
+            margin-bottom: 10px;
+        }
+
+        .terminal-command::before {
+            content: "$ ";
+            color: var(--color-accent);
+        }
+
+        .terminal-output {
+            color: var(--color-text-secondary);
+            margin-left: 20px;
+        }
+
+        /* Loading animation for service items */
+        .service-loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-loading::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-image {
+                order: -1;
+                margin-bottom: var(--spacing-lg);
+            }
+
+            .terminal {
+                display: none;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1;
+                margin-bottom: var(--spacing-lg);
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background-color: var(--color-bg);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            .nav.active {
+                right: 0;
+            }
+
+            .nav-item {
+                margin: 0;
+                margin-bottom: var(--spacing-md);
+            }
+
+            .nav-link {
+                font-size: 2rem;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+                z-index: 1000;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+
+            /* Contact Section Responsive */
+            .contact-info-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-info-section {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-modal-content {
+                width: 90%;
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+
+            .section {
+                padding: var(--spacing-lg) 0;
+            }
+
+            h1 {
+                font-size: clamp(2.8rem, 7vw, 4.8rem);
+            }
+
+            h2 {
+                font-size: clamp(2.4rem, 6vw, 3.6rem);
+            }
+
+            h3 {
+                font-size: clamp(2rem, 5vw, 2.8rem);
+            }
+
+            h4 {
+                font-size: clamp(1.8rem, 4vw, 2.2rem);
+            }
+
+            .hero-description {
+                font-size: 1.6rem;
+            }
+
+            .about-text {
+                font-size: 1.6rem;
+            }
+
+            .project-description,
+            .service-description {
+                font-size: 1.4rem;
+            }
+
+            /* Contact Section Responsive */
+            .contact-title {
+                font-size: 3.5rem;
+            }
+
+            .contact-message {
+                font-size: 1.8rem;
+            }
+
+            .contact-info-title {
+                font-size: 1.6rem;
+            }
+
+            .contact-info-item {
+                font-size: 1.4rem;
+            }
+
+            .contact-button {
+                font-size: 1.6rem;
+                padding: 12px 25px;
+            }
+
+            .services-title {
+                font-size: 3rem;
+            }
+
+            .services-title::before,
+            .services-title::after {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body id="top">
 
-
     <!-- # preloader
     ================================================== -->
     <div id="preloader">
-        <div id="loader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- # header
+    ================================================== -->
+    <header class="header" id="header">
+        <div class="container container-wide">
+            <div class="header-container">
+                <a href="#top" class="logo">Atul<span>.</span></a>
+                
+                <nav>
+                    <ul class="nav" id="nav">
+                        <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+                        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                        <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- # hero section
+    ================================================== -->
+    <section class="hero section" id="home">
+        <div class="hero-bg">
+            <canvas id="particles-canvas"></canvas>
+        </div>
+        
+        <div class="container container-wide">
+            <div class="hero-container">
+                <div class="hero-content fade-in">
+                    <div class="hero-subtitle">Hello, I'm</div>
+                    <h1 class="hero-title">
+                        Atul Kumar<br>
+                        <span class="highlight">PHP Developer</span> &<br>
+                        <span class="highlight">Cybersecurity Expert</span>
+                    </h1>
+                    <p class="hero-description">
+                        I build secure web applications with PHP and CodeIgniter 4, bringing my ethical hacking background to create robust and safe digital solutions.
+                    </p>
+                    
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn">View My Work</a>
+                        <a href="#contact" class="btn btn--outline">Get In Touch</a>
+                    </div>
+                    
+                    <div class="hero-social">
+                        <a href="https://github.com/mrroot54/" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="hero-image fade-in">
+                    <div class="hero-image-container">
+                        <img src="https://picsum.photos/seed/atulkumar/600/600.jpg" alt="Atul Kumar">
+                    </div>
+                    <div class="hero-image-decoration"></div>
+                    
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
+                        </div>
+                        <div class="terminal-body">
+                            <p>$ ./secure_app.sh</p>
+                            <p>Building secure app...<span class="typing-cursor"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- # about section
+    ================================================== -->
+    <section class="about section" id="about">
+        <div class="container container-wide">
+            <div class="section-title fade-in">
+                <h2>About Me</h2>
+            </div>
+            
+            <div class="about-container">
+                <div class="about-image fade-in">
+                    <div class="about-image-container">
+                        <img src="https://picsum.photos/seed/atulkumar2/500/600.jpg" alt="Atul Kumar">
+                    </div>
+                </div>
+                
+                <div class="about-content fade-in">
+                    <p class="about-text">
+                        I am Atul Kumar, a PHP Web Developer specializing in CodeIgniter 4 and building secure, responsive web applications. With a background as an Ethical Hacker & Web Penetration Tester, I combine development skills with security expertise to create robust, safe, and efficient web solutions.
+                    </p>
+                    
+                    <div class="skills">
+                        <div class="skill">PHP</div>
+                        <div class="skill">CodeIgniter 4</div>
+                        <div class="skill">MySQL</div>
+                        <div class="skill">HTML/CSS</div>
+                        <div class="skill">JavaScript</div>
+                        <div class="skill">Bootstrap</div>
+                        <div class="skill">Linux</div>
+                        <div class="skill">Bash Scripting</div>
+                        <div class="skill">Penetration Testing</div>
+                    </div>
+                    
+                    <a href="Atul-Kumar.pdf" class="btn" download>Download CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- # projects section
+    ================================================== -->
+    <section class="projects section" id="projects">
+        <div class="container container-wide">
+            <div class="section-title fade-in">
+                <h2>My Projects</h2>
+            </div>
+            
+            <div class="projects-container">
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://picsum.photos/seed/integritycheck/600/400.jpg" alt="IntegrityCheck">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">🔐 IntegrityCheck</h3>
+                        <p class="project-description">
+                            A lightweight tool designed to maintain data integrity and detect file tampering using SHA-256 cryptographic hashing.
+                        </p>
+                        <div class="project-tech">
+                            <div class="tech-tag">Python 3</div>
+                            <div class="tech-tag">hashlib</div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-eye"></i> View</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://picsum.photos/seed/edufinancehub/600/400.jpg" alt="EduFinanceHub">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">EduFinanceHub</h3>
+                        <p class="project-description">
+                            A web application built to manage student records and their associated financial transactions.
+                        </p>
+                        <div class="project-tech">
+                            <div class="tech-tag">HTML</div>
+                            <div class="tech-tag">CSS</div>
+                            <div class="tech-tag">JavaScript</div>
+                            <div class="tech-tag">PHP</div>
+                            <div class="tech-tag">MySQL</div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-eye"></i> View</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://picsum.photos/seed/safecrypt/600/400.jpg" alt="SafeCrypt">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">🔐 SafeCrypt</h3>
+                        <p class="project-description">
+                            A lightweight tool that allows users to encrypt and decrypt files or folders with ease.
+                        </p>
+                        <div class="project-tech">
+                            <div class="tech-tag">Python</div>
+                            <div class="tech-tag">Cryptography</div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-eye"></i> View</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://picsum.photos/seed/backup/600/400.jpg" alt="Remote Backup Encryption Tool">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">💾 Remote Backup Encryption Tool</h3>
+                        <p class="project-description">
+                            A Bash script that automates the process of creating encrypted backups of local directories and securely transferring them to a remote server.
+                        </p>
+                        <div class="project-tech">
+                            <div class="tech-tag">Bash</div>
+                            <div class="tech-tag">SSH</div>
+                            <div class="tech-tag">GPG</div>
+                            <div class="tech-tag">Cron</div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-eye"></i> View</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://picsum.photos/seed/saadiwala/600/400.jpg" alt="SaadiWala.com">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">🏨 SaadiWala.com</h3>
+                        <p class="project-description">
+                            A live, fully functional web platform designed to help users book hotels and resorts or make quick inquiries online.
+                        </p>
+                        <div class="project-tech">
+                            <div class="tech-tag">HTML</div>
+                            <div class="tech-tag">CSS</div>
+                            <div class="tech-tag">JavaScript</div>
+                            <div class="tech-tag">PHP</div>
+                            <div class="tech-tag">MySQL</div>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://saadiwala.com" target="_blank" class="project-link"><i class="fas fa-eye"></i> View</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://picsum.photos/seed/autogitsync/600/400.jpg" alt="AutoGitSync">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">🚀 AutoGitSync</h3>
+                        <p class="project-description">
+                            A Bash script designed to automate the process of synchronizing a local web project directory with a GitHub repository.
+                        </p>
+                        <div class="project-tech">
+                            <div class="tech-tag">Bash</div>
+                            <div class="tech-tag">Git</div>
+                            <div class="tech-tag">GitHub API</div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-eye"></i> View</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- # services section - Enhanced with animations
+    ================================================== -->
+    <section class="services section" id="services">
+        <div class="services-container">
+            <h2 class="services-title fade-in">SERVICES</h2>
+            
+            <div class="services-grid">
+                <div class="service-item fade-in service-loading" data-service-id="1">
+                    <div class="service-code">// 001</div>
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="service-title">CyberSecurity</h3>
+                    <p class="service-description">Web Application Penetration Testing</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-item fade-in service-loading" data-service-id="2">
+                    <div class="service-code">// 002</div>
+                    <div class="service-icon">
+                        <i class="fab fa-php"></i>
+                    </div>
+                    <h3 class="service-title">PHP Framework</h3>
+                    <p class="service-description">CodeIgniter4</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-item fade-in service-loading" data-service-id="3">
+                    <div class="service-code">// 003</div>
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="service-title">Development</h3>
+                    <p class="service-description">Full-Stack Web Development</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-item fade-in service-loading" data-service-id="4">
+                    <div class="service-code">// 004</div>
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="service-title">Website</h3>
+                    <p class="service-description">Custom PHP Website Development</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-item fade-in service-loading" data-service-id="5">
+                    <div class="service-code">// 005</div>
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="service-title">Database</h3>
+                    <p class="service-description">Database Security Testing (MySQL Focus)</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-item fade-in service-loading" data-service-id="6">
+                    <div class="service-code">// 006</div>
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="service-title">Maintenance</h3>
+                    <p class="service-description">Bug Fixing & Website Maintenance</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Modal - Enhanced -->
+    <div id="service-modal" class="service-modal">
+        <div class="service-modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-service-title" id="modal-service-title">Service Title</h2>
+            <img class="modal-service-image" id="modal-service-image" src="" alt="Service Image">
+            
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-dot"></div>
+                    <div class="terminal-dot"></div>
+                    <div class="terminal-dot"></div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-command">service.getInfo()</div>
+                    <div class="terminal-output" id="modal-service-description">Loading service information...</div>
+                </div>
+            </div>
+            
+            <div class="code-snippet">
+                <pre id="modal-service-code">const service = {
+  name: "Service Name",
+  features: []
+};</pre>
+            </div>
+            
+            <div class="modal-service-features">
+                <h3>Key Features</h3>
+                <ul id="modal-service-features-list">
+                    <!-- Features will be added dynamically -->
+                </ul>
+            </div>
+            
+            <div class="modal-service-contact">
+                <p>Interested in this service? Get in touch with me to discuss your requirements.</p>
+                <a href="#contact" class="btn">Contact Me</a>
+            </div>
         </div>
     </div>
 
-
-    <!-- # page wrap
+    <!-- # contact section - Modified to match the screenshot
     ================================================== -->
-    <div class="s-pagewrap">
-
-        <div class="circles">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-
-        <!-- ## site header 
-        ================================================== -->
-        <header class="s-header">
-
-            <div class="header-mobile">
-                <span class="mobile-home-link"><a href="index.html">Luther.</a></span>
-                <a class="mobile-menu-toggle" href="#0"><span>Menu</span></a>
-            </div>
-
-            <div class="row wide main-nav-wrap">
-                <nav class="column lg-12 main-nav">
-                    <ul>
-                        <li><a href="index.html" class="home-link">Luther.</a></li>
-                        <li class="current"><a href="#intro" class="smoothscroll">Intro</a></li>
-                        <li><a href="#about" class="smoothscroll">About</a></li>
-                        <li><a href="#works" class="smoothscroll">Works</a></li>
-                        <li><a href="#contact" class="smoothscroll">Say Hello</a></li>
-                    </ul>
-                </nav>
-            </div>
-
-        </header> <!-- end s-header -->
-
-
-        <!-- ## main content
-        ==================================================- -->
-        <main class="s-content">
-
-
-            <!-- ### intro
-            ================================================== -->
-            <section id="intro" class="s-intro target-section">
-
-                <div class="row intro-content wide">
-
-                    <div class="column">
-                        <div class="text-pretitle with-line">
-                            Hello World
-                        </div>
-
-                        <h1 class="text-huge-title">
-                            I am Luther, <br>
-                            a digital designer <br>
-                            & frontend <br> 
-                            developer based <br>
-                            in Somewhere.
-                        </h1>
-                    </div>
-
-                    <ul class="intro-social">
-                        <li><a href="#0">Behance</a></li>
-                        <li><a href="#0">Twitter</a></li>
-                        <li><a href="#0">Dribbble</a></li>
-                        <li><a href="#0">Instagram</a></li>
-                    </ul>
-
-                </div> <!-- end intro content -->
-
-                <a href="#about" class="intro-scrolldown smoothscroll">
-                    <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M11 21.883l-6.235-7.527-.765.644 7.521 9 7.479-9-.764-.645-6.236 7.529v-21.884h-1v21.883z"/></svg>
-                </a>
-
-            </section> <!-- end s-intro -->
-
-
-            <!-- ### about
-            ================================================== -->
-            <section id="about" class="s-about target-section">
-
-
-                <div class="row about-info wide" data-animate-block>
-
-                    <div class="column lg-6 md-12 about-info__pic-block">
-                        <img src="images/about-photo.jpg" 
-                             srcset="images/about-photo.jpg 1x, images/about-photo@2x.jpg 2x" alt="" class="about-info__pic" data-animate-el>
-                    </div>
-
-                    <div class="column lg-6 md-12">
-                        <div class="about-info__text" >
-
-                            <h2 class="text-pretitle with-line" data-animate-el>
-                                About
-                            </h2>
-                            <p class="attention-getter" data-animate-el>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-                                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
-                                velit esse cillum dolore eu fugiat nulla pariatur.
-                            </p>
-                            <a href="#0" class="btn btn--medium u-fullwidth" data-animate-el>Download CV</a>
-
-                        </div>
-                    </div>
-                </div> <!-- about-info -->
-
-
-                <div class="row about-expertise" data-animate-block>
-                    <div class="column lg-12">
-
-                        <h2 class="text-pretitle" data-animate-el>Expertise</h2>
-
-                        <ul class="skills-list h1" data-animate-el>
-                            <li>Visual Design</li>
-                            <li>Branding Identity</li>
-                            <li>UI Design</li>
-                            <li>Product Design</li>
-                            <li>Prototyping</li>
-                            <li>Illustration</li>
-                        </ul>
-
-                    </div>
-                </div> <!-- end about-expertise -->
-
-
-                <div class="row about-timelines" data-animate-block>
-
-                    <div class="column lg-6 tab-12">
-
-                        <h2 class="text-pretitle" data-animate-el>
-                            Experience
-                        </h2>
-
-                        <div class="timeline" data-animate-el>
-
-                            <div class="timeline__block">
-                                <div class="timeline__bullet"></div>
-                                <div class="timeline__header">
-                                    <h4 class="timeline__title">Dropbox</h3>
-                                    <h5 class="timeline__meta">Product Designer</h5>
-                                    <p class="timeline__timeframe">August 2019 - Present</p>
-                                </div>
-                                <div class="timeline__desc">
-                                    <p>Lorem ipsum Occaecat do esse ex et dolor culpa nisi ex in magna consectetur nisi cupidatat laboris esse eiusmod deserunt aute do quis velit esse sed Ut proident cupidatat nulla esse cillum laborum occaecat nostrud sit dolor incididunt amet est occaecat nisi.</p>
-                                </div>
-                            </div>
-    
-                            <div class="timeline__block">
-                                <div class="timeline__bullet"></div>
-                                <div class="timeline__header">
-                                    <h4 class="timeline__title">Microsoft</h4>
-                                    <h5 class="timeline__meta">Frontend Developer</h5>
-                                    <p class="timeline__timeframe">August 2016 - July 2019</p>
-                                </div>
-                                <div class="timeline__desc">
-                                    <p>Lorem ipsum Occaecat do esse ex et dolor culpa nisi ex in magna consectetur nisi cupidatat laboris esse eiusmod deserunt aute do quis velit esse sed Ut proident cupidatat nulla esse cillum laborum occaecat nostrud sit dolor incididunt amet est occaecat nisi.</p>
-                                </div>
-                            </div>
-    
-                        </div> <!-- end timeline -->
-
-                    </div> <!-- end column -->
-
-                    <div class="column lg-6 tab-12">
-
-                        <h2 class="text-pretitle" data-animate-el>
-                            Education
-                        </h2>
-
-                        <div class="timeline" data-animate-el>
-
-                            <div class="timeline__block">
-                                <div class="timeline__bullet"></div>
-                                <div class="timeline__header">
-                                    <h4 class="timeline__title">University of Life</h3>
-                                    <h5 class="timeline__meta">Master in Graphic Design</h5>
-                                    <p class="timeline__timeframe">April 2015</p>
-                                </div>
-                                <div class="timeline__desc">
-                                    <p>Lorem ipsum Occaecat do esse ex et dolor culpa nisi ex in magna consectetur nisi cupidatat laboris esse eiusmod deserunt aute do quis velit esse sed Ut proident cupidatat nulla esse cillum laborum occaecat nostrud sit dolor incididunt amet est occaecat nisi.</p>
-                                </div>
-                            </div>
-    
-                            <div class="timeline__block">
-                                <div class="timeline__bullet"></div>
-                                <div class="timeline__header">
-                                    <h4 class="timeline__title">School of Cool Designers</h4>
-                                    <h5 class="timeline__meta">B.A. Degree in Graphic Design</h5>
-                                    <p class="timeline__timeframe">August 2012</p>
-                                </div>
-                                <div class="timeline__desc">
-                                    <p>Lorem ipsum Occaecat do esse ex et dolor culpa nisi ex in magna consectetur nisi cupidatat laboris esse eiusmod deserunt aute do quis velit esse sed Ut proident cupidatat nulla esse cillum laborum occaecat nostrud sit dolor incididunt amet est occaecat nisi.</p>
-                                </div>
-                            </div>
-    
-                        </div> <!-- end timeline -->
-                        
-                    </div> <!-- end column -->
-
-
-                </div> <!-- end about-timelines -->
-
-            </section> <!-- end s-about -->
-
-
-            <!-- ### works
-            ================================================== -->
-            <section id="works" class="s-works target-section">
-
-
-                <div class="row works-portfolio">
-
-                    <div class="column lg-12" data-animate-block>
-
-                        <h2 class="text-pretitle" data-animate-el>
-                            Recent Works
-                        </h2>
-                        <p class="h1" data-animate-el>
-                            Here are some of my favorite projects I have done lately. Feel free to check them out.
-                        </p>
-    
-                        <ul class="folio-list row block-lg-one-half block-stack-on-1000">
-
-                            <li class="folio-list__item column" data-animate-el>
-                                <a class="folio-list__item-link" href="#modal-01">
-                                    <div class="folio-list__item-pic">
-                                        <img src="images/portfolio/fuji.jpg"
-                                             srcset="images/portfolio/fuji.jpg 1x, images/portfolio/fuji@2x.jpg 2x"  alt="">
-                                    </div>
-                                    
-                                    <div class="folio-list__item-text">
-                                        <div class="folio-list__item-cat">
-                                            Website
-                                        </div>
-                                        <div class="folio-list__item-title">
-                                            Retro Camera.
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="folio-list__proj-link" href="#" title="project link">
-                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                                </a>
-                            </li> <!--end folio-list__item -->
-
-                            <li class="folio-list__item column" data-animate-el>
-                                <a class="folio-list__item-link" href="#modal-02">
-                                    <div class="folio-list__item-pic">
-                                        <img src="images/portfolio/lamp.jpg" 
-                                             srcset="images/portfolio/lamp.jpg 1x, images/portfolio/lamp@2x.jpg 2x" alt="">
-                                    </div>
-                                    
-                                    <div class="folio-list__item-text">
-                                        <div class="folio-list__item-cat">
-                                            Product Design
-                                        </div>
-                                        <div class="folio-list__item-title">
-                                            The White Lamp.
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="folio-list__proj-link" href="#" title="project link">
-                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                                </a>
-                            </li> <!--end folio-list__item -->
-
-                            <li class="folio-list__item column" data-animate-el>
-                                <a class="folio-list__item-link" href="#modal-03">
-                                    <div class="folio-list__item-pic">
-                                        <img src="images/portfolio/rucksack.jpg" 
-                                             srcset="images/portfolio/rucksack.jpg 1x, images/portfolio/rucksack@2x.jpg 2x" alt="">
-                                    </div>
-                                    
-                                    <div class="folio-list__item-text">
-                                        <div class="folio-list__item-cat">
-                                            Branding
-                                        </div>
-                                        <div class="folio-list__item-title">
-                                            Rucksuck.
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="folio-list__proj-link" href="#" title="project link">
-                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                                </a>
-                            </li> <!--end folio-list__item -->
-
-                            <li class="folio-list__item column" data-animate-el>
-                                <a class="folio-list__item-link" href="#modal-04">
-                                    <div class="folio-list__item-pic">
-                                        <img src="images/portfolio/skaterboy.jpg"
-                                             srcset="images/portfolio/skaterboy.jpg 1x, images/portfolio/skaterboy@2x.jpg 2x" alt="">
-                                    </div>
-                                    
-                                    <div class="folio-list__item-text">
-                                        <div class="folio-list__item-cat">
-                                            Website
-                                        </div>
-                                        <div class="folio-list__item-title">
-                                            Since Day One.
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="folio-list__proj-link" href="#" title="project link">
-                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                                </a>
-                            </li> <!--end folio-list__item -->
-
-                            <li class="folio-list__item column" data-animate-el>
-                                <a class="folio-list__item-link" href="#modal-05">
-                                    <div class="folio-list__item-pic">
-                                        <img src="images/portfolio/sanddunes.jpg" 
-                                             srcset="images/portfolio/sanddunes.jpg 1x, images/portfolio/sanddunes@2x.jpg 2x" alt="">
-                                    </div>
-                                    
-                                    <div class="folio-list__item-text">
-                                        <div class="folio-list__item-cat">
-                                            Illustration
-                                        </div>
-                                        <div class="folio-list__item-title">
-                                            Sand Dunes.
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="folio-list__proj-link" href="#" title="project link">
-                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                                </a>
-                            </li> <!--end folio-list__item -->
-
-                            <li class="folio-list__item column" data-animate-el>
-                                <a class="folio-list__item-link" href="#modal-06">
-                                    <div class="folio-list__item-pic">
-                                        <img src="images/portfolio/minimalismo.jpg" 
-                                             srcset="images/portfolio/minimalismo.jpg 1x, images/portfolio/minimalismo@2x.jpg 2x" alt="">
-                                    </div>
-                                    
-                                    <div class="folio-list__item-text">
-                                        <div class="folio-list__item-cat">
-                                            Branding
-                                        </div>
-                                        <div class="folio-list__item-title">
-                                            Minimalismo.
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="folio-list__proj-link" href="#" title="project link">
-                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                                </a>
-                            </li> <!--end folio-list__item -->
-
-                        </ul> <!-- end folio-list -->
-
-                    </div> <!-- end column -->
-
-
-                    <!-- Modal Templates Popup
-                    -------------------------------------------- -->
-                    <div id="modal-01" hidden>
-                        <div class="modal-popup">
-                            <img src="images/portfolio/gallery/g-fuji.jpg" alt="">
-                
-                            <div class="modal-popup__desc">
-                                <h5>Retro Camera</h5>
-                                <p>Odio soluta enim quos sit asperiores rerum rerum repudiandae cum. Vel voluptatem alias qui assumenda iure et expedita voluptatem. Ratione officiis quae.</p>
-                                <ul class="modal-popup__cat">
-                                    <li>Branding</li>
-                                    <li>Product Design</li>
-                                </ul>
-                            </div>
-                
-                            <a href="https://www.behance.net/" class="modal-popup__details">Project link</a>
-                        </div>
-                    </div> <!-- end modal -->
-
-                    <div id="modal-02" hidden>
-                        <div class="modal-popup">
-                            <img src="images/portfolio/gallery/g-lamp.jpg" alt="">
-                
-                            <div class="modal-popup__desc">
-                                <h5>The White Lamp</h5>
-                                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-                                <ul class="modal-popup__cat">
-                                    <li>Branding</li>
-                                </ul>
-                            </div>
-                
-                            <a href="https://www.behance.net/" class="modal-popup__details">Project link</a>
-                        </div>
-                    </div> <!-- end modal -->
-
-                    <div id="modal-03" hidden>
-                        <div class="modal-popup">
-                            <img src="images/portfolio/gallery/g-rucksack.jpg" alt="">
-                
-                            <div class="modal-popup__desc">
-                                <h5>Rucksuck</h5>
-                                <p>Exercitationem reprehenderit quod explicabo consequatur aliquid ut magni ut. Deleniti quo corrupti illum velit eveniet ratione necessitatibus ipsam mollitia.</p>
-                                <ul class="modal-popup__cat">
-                                    <li>Product Design</li>
-                                </ul>
-                            </div>
-                
-                            <a href="https://www.behance.net/" class="modal-popup__details">Project link</a>
-                        </div>
-                    </div> <!-- end modal -->
-
-                    <div id="modal-04" hidden>
-                        <div class="modal-popup">
-                            <img src="images/portfolio/gallery/g-skaterboy.jpg" alt="">
-                
-                            <div class="modal-popup__desc">
-                                <h5>Since Day One</h5>
-                                <p>Dolores velit qui quos nobis. Aliquam delectus voluptas quos possimus non voluptatem voluptas voluptas. Est doloribus eligendi porro doloribus voluptatum.</p>
-                                <ul class="modal-popup__cat">
-                                    <li>Website</li>
-                                </ul>
-                            </div>
-                
-                            <a href="https://www.behance.net/" class="modal-popup__details">Project link</a>
-                        </div>
-                    </div> <!-- end modal -->
-
-                    <div id="modal-05" hidden>
-                        <div class="modal-popup">
-
-                            <img src="images/portfolio/gallery/g-sanddunes.jpg" alt="">
-                
-                            <div class="modal-popup__desc">
-                                <h5>Sand Dunes</h5>
-                                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-                                <ul class="modal-popup__cat">
-                                    <li>Illustration</li>
-                                </ul>
-                            </div>
-                
-                            <a href="https://www.behance.net/" class="modal-popup__details">Project link</a>
-                        </div>
-                    </div> <!-- end modal -->
-
-                    <div id="modal-06" hidden>
-                        <div class="modal-popup">
-                            <img src="images/portfolio/gallery/g-minimalismo.jpg" alt="">
-                
-                            <div class="modal-popup__desc">
-                                <h5>Minimalismo</h5>
-                                <p>Quisquam vel libero consequuntur autem voluptas. Qui aut vero. Omnis fugit mollitia cupiditate voluptas. Aenean sollicitudin, lorem quis bibendum auctor.</p>
-                                <ul class="modal-popup__cat">
-                                    <li>Branding</li>
-                                    <li>Product Design</li>
-                                </ul>
-                            </div>
-                
-                            <a href="https://www.behance.net/" class="modal-popup__details">Project link</a>
-                        </div>
-                    </div> <!-- end modal -->
-
-                </div> <!-- end works-portfolio -->
-
-
-                <div class="row testimonials">
-                    <div class="column lg-12" data-animate-block>
-        
-                        <div class="swiper-container testimonial-slider" data-animate-el>
-        
-                            <div class="swiper-wrapper">
-
-                                <div class="testimonial-slider__slide swiper-slide">
-                                    <div class="testimonial-slider__author">
-                                        <img src="images/avatars/user-02.jpg" alt="Author image" class="testimonial-slider__avatar">
-                                        <cite class="testimonial-slider__cite">
-                                            <strong>Tim Cook</strong>
-                                            <span>CEO, Apple</span>
-                                        </cite>
-                                    </div>
-                                    <p>
-                                    Molestiae incidunt consequatur quis ipsa autem nam sit enim magni. Voluptas tempore rem. 
-                                    Explicabo a quaerat sint autem dolore ducimus ut consequatur neque.  Nisi dolores quaerat fuga rem nihil nostrum.
-                                    Laudantium quia consequatur molestias delectus culpa.
-                                    </p>
-                                </div> <!-- end testimonial-slider__slide -->
-                
-                                <div class="testimonial-slider__slide swiper-slide">
-                                    <div class="testimonial-slider__author">
-                                        <img src="images/avatars/user-03.jpg" alt="Author image" class="testimonial-slider__avatar">
-                                        <cite class="testimonial-slider__cite">
-                                            <strong>Sundar Pichai</strong>
-                                            <span>CEO, Google</span>
-                                        </cite>
-                                    </div>
-                                    <p>
-                                    Excepturi nam cupiditate culpa doloremque deleniti repellat. Veniam quos repellat voluptas animi adipisci.
-                                    Nisi eaque consequatur. Voluptatem dignissimos ut ducimus accusantium perspiciatis.
-                                    Quasi voluptas eius distinctio. Atque eos maxime.
-                                    </p>
-                                </div> <!-- end testimonial-slider__slide -->
-                
-                                <div class="testimonial-slider__slide swiper-slide">
-                                    <div class="testimonial-slider__author">
-                                        <img src="images/avatars/user-01.jpg" alt="Author image" class="testimonial-slider__avatar">
-                                        <cite class="testimonial-slider__cite">
-                                            <strong>Satya Nadella</strong>
-                                            <span>CEO, Microsoft</span>
-                                        </cite>
-                                    </div>
-                                    <p>
-                                    Repellat dignissimos libero. Qui sed at corrupti expedita voluptas odit. Nihil ea quia nesciunt. Ducimus aut sed ipsam.  
-                                    Autem eaque officia cum exercitationem sunt voluptatum accusamus. Quasi voluptas eius distinctio.
-                                    Voluptatem dignissimos ut.
-                                    </p>
-                                </div> <!-- end testimonial-slider__slide -->
-        
-                                <div class="testimonial-slider__slide swiper-slide">
-                                    <div class="testimonial-slider__author">
-                                        <img src="images/avatars/user-06.jpg" alt="Author image" class="testimonial-slider__avatar">
-                                        <cite class="testimonial-slider__cite">
-                                            <strong>Jeff Bezos</strong>
-                                            <span>CEO, Amazon</span>
-                                        </cite>
-                                    </div>
-                                    <p>
-                                    Nunc interdum lacus sit amet orci. Vestibulum dapibus nunc ac augue. Fusce vel dui. In ac felis 
-                                    quis tortor malesuada pretium. Curabitur vestibulum aliquam leo. Qui sed at corrupti expedita voluptas odit. 
-                                    Nihil ea quia nesciunt. Ducimus aut sed ipsam.
-                                    </p>
-                                </div> <!-- end testimonial-slider__slide -->
+    <section class="contact section" id="contact">
+        <div class="contact-container">
+            <h2 class="contact-title fade-in">GET IN TOUCH</h2>
+            <p class="contact-message fade-in">
+                I love to hear from you. Whether you have a question or just want to chat about design, tech & art — shoot me a message.
+            </p>
             
-                            </div> <!-- end swiper-wrapper -->
-        
-                            <div class="swiper-pagination"></div>
-        
-                        </div> <!-- end swiper-container -->
-        
-                    </div> <!-- end column -->
-                </div> <!-- end row testimonials -->
-
-            </section> <!-- end s-works -->
-
-
-            <!-- ### contact
-            ================================================== -->
-            <section id="contact" class="s-contact target-section">
-
-                <div class="row contact-top">
-                    <div class="column lg-12">
-                        <h2 class="text-pretitle">
-                            Get In Touch
-                        </h2>
-
-                        <p class="h1">
-                            I love to hear from you.
-                            Whether you have a question or just 
-                            want to chat about design, tech & art — shoot me a message.
-                        </p>
+            <div class="contact-info-container fade-in">
+                <div class="contact-info-section">
+                    <h3 class="contact-info-title">REACH ME AT</h3>
+                    <div class="contact-info-item">
+                        <a href="mailto:mrroot543@gmail.com">mrroot543@gmail.com</a>
                     </div>
-                </div> <!-- end contact-top -->
-
-                <div class="row contact-bottom">
-                    <div class="column lg-3 md-5 tab-6 stack-on-550 contact-block">
-                        <h3 class="text-pretitle">Reach me at</h3>
-                        <p class="contact-links">
-                            <a href="mailto:sayhello@luther.com" class="mailtoui">sayhello@luther.com</a> <br>
-                            <a href="tel:+1975432345">+197 543 2345</a>
-                        </p>
+                    <div class="contact-info-item">
+                        <a href="tel:+917277282930">+91 7277282930</a>
                     </div>
-                    <div class="column lg-4 md-5 tab-6 stack-on-550 contact-block">
-                        <h3 class="text-pretitle">Social</h3>
-                        <ul class="contact-social">
-                            <li><a href="#0">Behance</a></li>
-                            <li><a href="#0">Dribble</a></li>
-                            <li><a href="#0">Twitter</a></li>
-                            <li><a href="#0">Instagram</a></li>
-                            <li><a href="#0">Github</a></li>
-                        </ul>
-                    </div>
-                    <div class="column lg-4 md-12 contact-block">
-                        <a href="mailto:sayhello@luther.com" class="mailtoui btn btn--medium u-fullwidth contact-btn">Say Hello.</a>
-                    </div>
-                </div> <!-- end contact-bottom -->
-
-            </section> <!-- end contact -->
-
-        </main> <!-- end s-content -->
-
-
-        <!-- ## footer
-        ================================================== -->
-        <footer class="s-footer">
-
-            <div class="row">
-                <div class="column ss-copyright">
-                    <span>© Copyright Luther 2021</span> 
-                    <span>Design by <a href="https://www.styleshout.com/">StyleShout</a> Distribution By <a href="https://themewagon.com">Themewagon</a></span>
                 </div>
-
-                <div class="ss-go-top">
-                    <a class="smoothscroll" title="Back to Top" href="#top">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill-rule="evenodd" clip-rule="evenodd"><path d="M11 2.206l-6.235 7.528-.765-.645 7.521-9 7.479 9-.764.646-6.236-7.53v21.884h-1v-21.883z"/></svg>
-                    </a>
+                
+                <div class="contact-info-section">
+                    <h3 class="contact-info-title">SOCIAL</h3>
+                    <div class="social-links">
+                        <a href="https://www.behance.net" target="_blank" class="social-link">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                        <a href="https://dribbble.com" target="_blank" class="social-link">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://github.com/mrroot54/" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-info-section">
+                    <a href="#contact-form" class="contact-button">SAY HELLO.</a>
                 </div>
             </div>
+            
+            <div class="copyright fade-in">
+                © 2025 Atul Kumar. All Rights Reserved.
+            </div>
+        </div>
+    </section>
 
-        </footer> <!-- end s-footer -->
+    <!-- # footer
+    ================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-social">
+                    <a href="https://github.com/mrroot54/" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+                
+                <div class="footer-copyright">
+                    <p>&copy; 2025 Atul Kumar. All Rights Reserved. Design by <a href="#">Atul Kumar</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    </div> <!-- end -s-pagewrap -->
-
+    <!-- # back to top button
+    ================================================== -->
+    <a href="#top" class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
 
     <!-- Java Script
     ================================================== -->
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Preloader
+            $(window).on('load', function() {
+                $('#preloader').delay(500).fadeOut('slow');
+            });
+            
+            // Mobile Menu Toggle
+            $('#mobile-menu-toggle').on('click', function() {
+                $(this).toggleClass('active');
+                $('#nav').toggleClass('active');
+            });
+            
+            // Close mobile menu when clicking on a link
+            $('.nav-link').on('click', function() {
+                $('#mobile-menu-toggle').removeClass('active');
+                $('#nav').removeClass('active');
+            });
+            
+            // Header scroll effect
+            $(window).on('scroll', function() {
+                if ($(this).scrollTop() > 50) {
+                    $('#header').addClass('scrolled');
+                } else {
+                    $('#header').removeClass('scrolled');
+                }
+            });
+            
+            // Active navigation link - Fixed
+            $(window).on('scroll', function() {
+                let scrollPosition = $(window).scrollTop();
+                let windowHeight = $(window).height();
+                
+                // Check each section
+                $('.section').each(function() {
+                    let sectionTop = $(this).offset().top;
+                    let sectionHeight = $(this).outerHeight();
+                    let sectionId = $(this).attr('id');
+                    
+                    // If we're in the current section
+                    if (scrollPosition >= sectionTop - 100 && scrollPosition < sectionTop + sectionHeight - 100) {
+                        // Remove active class from all nav links
+                        $('.nav-link').removeClass('active');
+                        
+                        // Add active class to the corresponding nav link
+                        $(`.nav-link[href="#${sectionId}"]`).addClass('active');
+                    }
+                });
+                
+                // Special case for home section when at the top of the page
+                if (scrollPosition < 100) {
+                    $('.nav-link').removeClass('active');
+                    $('.nav-link[href="#home"]').addClass('active');
+                }
+            });
+            
+            // Smooth scrolling for navigation links - Fixed
+            $('a[href*="#"]').not('[href="#"]').not('[href="#0"]').on('click', function(event) {
+                // Make sure the hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
+                    
+                    // Store hash
+                    var hash = this.hash;
+                    
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top - 80
+                    }, 800, function() {
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                        window.location.hash = hash;
+                    });
+                } // End if
+            });
+            
+            // Back to top button
+            $(window).on('scroll', function() {
+                if ($(this).scrollTop() > 300) {
+                    $('#back-to-top').addClass('active');
+                } else {
+                    $('#back-to-top').removeClass('active');
+                }
+            });
+            
+            // Fade in animation on scroll
+            function animateOnScroll() {
+                $('.fade-in').each(function() {
+                    let elementPos = $(this).offset().top;
+                    let scrollPos = $(window).scrollTop();
+                    let windowHeight = $(window).height();
+                    
+                    if (elementPos < scrollPos + windowHeight - 100) {
+                        $(this).addClass('active');
+                    }
+                });
+            }
+            
+            $(window).on('scroll', animateOnScroll);
+            animateOnScroll(); // Initial check
+            
+            // Particles background for hero section
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const particleCount = 100;
+            
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 3 + 1;
+                    this.speedX = Math.random() * 0.5 - 0.25;
+                    this.speedY = Math.random() * 0.5 - 0.25;
+                    this.opacity = Math.random() * 0.5 + 0.2;
+                }
+                
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    
+                    if (this.x > canvas.width || this.x < 0) {
+                        this.speedX = -this.speedX;
+                    }
+                    
+                    if (this.y > canvas.height || this.y < 0) {
+                        this.speedY = -this.speedY;
+                    }
+                }
+                
+                draw() {
+                    ctx.fillStyle = `rgba(230, 0, 35, ${this.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            function init() {
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+                }
+                
+                // Draw connections
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.strokeStyle = `rgba(230, 0, 35, ${0.2 * (1 - distance / 100)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            init();
+            animate();
+            
+            // Resize canvas on window resize
+            $(window).on('resize', function() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+            
+            // Service Modal functionality - Enhanced
+            const serviceData = {
+                1: {
+                    title: "CyberSecurity - Web Application Penetration Testing",
+                    image: "https://picsum.photos/seed/cybersecurity/800/400.jpg",
+                    description: "I provide comprehensive web application penetration testing services to identify and fix security vulnerabilities in your web applications before attackers can exploit them. My testing methodology follows industry standards and covers all major vulnerability categories.",
+                    code: `const pentest = {
+  methodology: "OWASP Top 10",
+  tools: ["Burp Suite", "Nmap", "SQLMap"],
+  report: "Detailed vulnerability report with remediation steps"
+};`,
+                    features: [
+                        "OWASP Top 10 vulnerability assessment",
+                        "Authentication and authorization testing",
+                        "Session management testing",
+                        "Input validation and injection testing",
+                        "Cryptography implementation review",
+                        "Business logic flaw identification",
+                        "Detailed vulnerability report with remediation steps"
+                    ]
+                },
+                2: {
+                    title: "PHP Framework - CodeIgniter4",
+                    image: "https://picsum.photos/seed/codeigniter/800/400.jpg",
+                    description: "I specialize in building secure and efficient web applications using the CodeIgniter4 PHP framework with MVC architecture. My expertise includes creating custom modules, implementing security best practices, and optimizing performance.",
+                    code: `const codeigniter = {
+  version: "4.x",
+  architecture: "MVC",
+  features: ["RESTful API", "Database abstraction", "Security filters"]
+};`,
+                    features: [
+                        "Custom module development",
+                        "RESTful API creation",
+                        "Database integration and optimization",
+                        "Security implementation (CSRF, XSS protection)",
+                        "Custom library and helper development",
+                        "Performance optimization",
+                        "Code review and refactoring"
+                    ]
+                },
+                3: {
+                    title: "Development - Full-Stack Web Development",
+                    image: "https://picsum.photos/seed/fullstack/800/400.jpg",
+                    description: "I offer complete web development solutions from frontend to backend using HTML, CSS, JavaScript, PHP, and MySQL. My approach focuses on creating responsive, user-friendly, and secure web applications tailored to your specific needs.",
+                    code: `const fullstack = {
+  frontend: ["HTML5", "CSS3", "JavaScript", "React"],
+  backend: ["PHP", "Node.js", "Python"],
+  database: ["MySQL", "MongoDB", "PostgreSQL"]
+};`,
+                    features: [
+                        "Responsive frontend design",
+                        "Backend API development",
+                        "Database design and implementation",
+                        "User authentication and authorization",
+                        "Third-party service integration",
+                        "Performance optimization",
+                        "Cross-browser compatibility testing"
+                    ]
+                },
+                4: {
+                    title: "Website - Custom PHP Website Development",
+                    image: "https://picsum.photos/seed/customphp/800/400.jpg",
+                    description: "I create tailored websites with custom features, user authentication, data management, and database integration. Whether you need a simple brochure site or a complex web application, I can deliver a solution that meets your requirements.",
+                    code: `const customPHP = {
+  framework: "Native PHP / CodeIgniter",
+  features: ["User management", "Content management", "E-commerce"],
+  database: "MySQL with optimized queries"
+};`,
+                    features: [
+                        "Custom feature development",
+                        "User management systems",
+                        "Content management solutions",
+                        "E-commerce functionality",
+                        "Payment gateway integration",
+                        "Custom reporting and analytics",
+                        "SEO optimization"
+                    ]
+                },
+                5: {
+                    title: "Database - Database Security Testing (MySQL Focus)",
+                    image: "https://picsum.photos/seed/database/800/400.jpg",
+                    description: "I provide comprehensive testing of MySQL databases to identify security risks and ensure your data remains safe from unauthorized access. My testing covers both the database server configuration and the application's interaction with the database.",
+                    code: `const dbSecurity = {
+  database: "MySQL",
+  tests: ["SQL injection", "Access control", "Encryption"],
+  tools: ["SQLMap", "MySQL Workbench", "Custom scripts"]
+};`,
+                    features: [
+                        "SQL injection vulnerability assessment",
+                        "Database configuration review",
+                        "Access control testing",
+                        "Data encryption verification",
+                        "Backup and recovery testing",
+                        "Performance optimization",
+                        "Database security hardening recommendations"
+                    ]
+                },
+                6: {
+                    title: "Maintenance - Bug Fixing & Website Maintenance",
+                    image: "https://picsum.photos/seed/maintenance/800/400.jpg",
+                    description: "I offer regular maintenance services to keep your website running smoothly with bug fixes, updates, and security improvements. My maintenance services ensure your website remains secure, up-to-date, and performing optimally.",
+                    code: `const maintenance = {
+  schedule: "Weekly/Monthly",
+  tasks: ["Bug fixes", "Security updates", "Performance monitoring"],
+  reporting: "Monthly status reports"
+};`,
+                    features: [
+                        "Bug identification and fixing",
+                        "Security updates and patches",
+                        "Performance monitoring and optimization",
+                        "Content updates and modifications",
+                        "Backup management",
+                        "Uptime monitoring",
+                        "Technical support and consultation"
+                    ]
+                }
+            };
+            
+            // Open service modal - Enhanced with typing effect
+            $('.service-item').on('click', function(e) {
+                e.preventDefault();
+                const serviceId = $(this).data('service-id');
+                const service = serviceData[serviceId];
+                
+                if (service) {
+                    $('#modal-service-title').text(service.title);
+                    $('#modal-service-image').attr('src', service.image);
+                    
+                    // Typing effect for description
+                    const descriptionElement = $('#modal-service-description');
+                    descriptionElement.empty();
+                    const descriptionText = service.description;
+                    let charIndex = 0;
+                    
+                    const typeDescription = setInterval(() => {
+                        if (charIndex < descriptionText.length) {
+                            descriptionElement.append(descriptionText.charAt(charIndex));
+                            charIndex++;
+                        } else {
+                            clearInterval(typeDescription);
+                        }
+                    }, 20);
+                    
+                    // Update code snippet
+                    $('#modal-service-code').text(service.code);
+                    
+                    // Clear and populate features list with animation
+                    $('#modal-service-features-list').empty();
+                    service.features.forEach(function(feature, index) {
+                        setTimeout(() => {
+                            $('#modal-service-features-list').append(`<li><i class="fas fa-check-circle"></i> ${feature}</li>`);
+                        }, index * 100);
+                    });
+                    
+                    // Show modal with animation
+                    $('#service-modal').css('display', 'block');
+                    $('body').css('overflow', 'hidden');
+                    
+                    // Add glitch effect to modal
+                    $('.service-modal-content').addClass('glitch-effect');
+                    setTimeout(() => {
+                        $('.service-modal-content').removeClass('glitch-effect');
+                    }, 500);
+                }
+            });
+            
+            // Close modal
+            $('.close-modal').on('click', function() {
+                $('#service-modal').css('display', 'none');
+                $('body').css('overflow', 'auto');
+            });
+            
+            // Close modal when clicking outside of it
+            $(window).on('click', function(e) {
+                if ($(e.target).is('#service-modal')) {
+                    $('#service-modal').css('display', 'none');
+                    $('body').css('overflow', 'auto');
+                }
+            });
+            
+            // Remove loading animation after page load
+            setTimeout(() => {
+                $('.service-loading').removeClass('service-loading');
+            }, 2000);
+        });
+    </script>
 </body>
 </html>
