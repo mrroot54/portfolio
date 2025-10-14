@@ -2488,11 +2488,24 @@
             let lastScrollTop = 0;
             let scrollTimer = null;
             let animatedItems = new Set(); // Track which items have been animated
+            let isTouchScrolling = false; // Track if scroll is triggered by touch
+            
+            // Touch event handlers to detect touch scrolling
+            document.addEventListener('touchstart', function() {
+                isTouchScrolling = true;
+            }, { passive: true });
+            
+            document.addEventListener('touchend', function() {
+                // Reset the flag after a short delay to allow regular scroll events
+                setTimeout(() => {
+                    isTouchScrolling = false;
+                }, 100);
+            }, { passive: true });
             
             // Scroll event handler for mobile
             $(window).on('scroll', function() {
-                // Only proceed if we're on mobile
-                if (window.innerWidth <= 768) {
+                // Only proceed if we're on mobile and it's not a touch-triggered scroll
+                if (window.innerWidth <= 768 && !isTouchScrolling) {
                     const servicesSection = $('#services');
                     const servicesTop = servicesSection.offset().top;
                     const servicesBottom = servicesTop + servicesSection.outerHeight();
