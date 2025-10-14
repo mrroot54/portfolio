@@ -790,7 +790,8 @@
             z-index: -1;
         }
 
-        .service-item:hover::before {
+        .service-item:hover::before,
+        .service-item.mobile-hover::before {
             opacity: 1;
         }
 
@@ -807,11 +808,13 @@
             z-index: -1;
         }
 
-        .service-item:hover::after {
+        .service-item:hover::after,
+        .service-item.mobile-hover::after {
             opacity: 1;
         }
 
-        .service-item:hover {
+        .service-item:hover,
+        .service-item.mobile-hover {
             transform: translateY(-15px) scale(1.03);
             box-shadow: 0 20px 40px rgba(230, 0, 35, 0.3);
             border-color: rgba(230, 0, 35, 0.5);
@@ -847,17 +850,20 @@
             z-index: -1;
         }
 
-        .service-item:hover .service-icon {
+        .service-item:hover .service-icon,
+        .service-item.mobile-hover .service-icon {
             transform: scale(1.1) rotate(5deg);
             box-shadow: 0 10px 20px rgba(230, 0, 35, 0.4);
         }
 
-        .service-item:hover .service-icon::before {
+        .service-item:hover .service-icon::before,
+        .service-item.mobile-hover .service-icon::before {
             width: 100%;
             height: 100%;
         }
 
-        .service-item:hover .service-icon i {
+        .service-item:hover .service-icon i,
+        .service-item.mobile-hover .service-icon i {
             color: #ffffff;
             transform: scale(0.9);
         }
@@ -883,7 +889,8 @@
             transition: width 0.3s ease;
         }
 
-        .service-item:hover .service-title::after {
+        .service-item:hover .service-title::after,
+        .service-item.mobile-hover .service-title::after {
             width: 100%;
         }
 
@@ -918,11 +925,13 @@
             transition: transform 0.3s ease;
         }
 
-        .service-link:hover::before {
+        .service-link:hover::before,
+        .service-item.mobile-hover .service-link::before {
             transform: translateX(0);
         }
 
-        .service-link:hover {
+        .service-link:hover,
+        .service-item.mobile-hover .service-link {
             color: var(--color-accent-hover);
         }
 
@@ -931,12 +940,14 @@
             transition: transform 0.3s ease;
         }
 
-        .service-link:hover i {
+        .service-link:hover i,
+        .service-item.mobile-hover .service-link i {
             transform: translateX(5px);
         }
 
         /* Glitch effect for service items */
-        .service-item:hover .service-icon {
+        .service-item:hover .service-icon,
+        .service-item.mobile-hover .service-icon {
             animation: glitch 0.3s infinite;
         }
 
@@ -973,7 +984,8 @@
             transition: opacity 0.3s ease;
         }
 
-        .service-item:hover .service-code {
+        .service-item:hover .service-code,
+        .service-item.mobile-hover .service-code {
             opacity: 1;
         }
 
@@ -2491,21 +2503,34 @@
                 $('.service-loading').removeClass('service-loading');
             }, 2000);
             
-            // Mobile scroll animation for services
+            // Mobile scroll animation for services - Fixed
             let serviceAnimated = false;
+            let serviceHovered = [];
             
             function animateServicesOnMobile() {
-                if (window.innerWidth <= 768 && !serviceAnimated) {
+                if (window.innerWidth <= 768) {
                     const servicesSection = $('#services');
                     const servicesTop = servicesSection.offset().top;
                     const scrollPos = $(window).scrollTop();
                     const windowHeight = $(window).height();
                     
-                    if (scrollPos + windowHeight > servicesTop) {
+                    if (scrollPos + windowHeight > servicesTop && !serviceAnimated) {
                         $('.service-item').each(function(index) {
+                            const $this = $(this);
                             setTimeout(() => {
-                                $(this).addClass('mobile-animate');
-                            }, index * 200);
+                                $this.addClass('mobile-animate');
+                                
+                                // Apply hover effect after animation completes
+                                setTimeout(() => {
+                                    $this.addClass('mobile-hover');
+                                    serviceHovered.push(index);
+                                    
+                                    // Remove hover effect after a few seconds
+                                    setTimeout(() => {
+                                        $this.removeClass('mobile-hover');
+                                    }, 3000);
+                                }, 800);
+                            }, index * 300);
                         });
                         serviceAnimated = true;
                     }
@@ -2525,7 +2550,8 @@
                     
                     if (scrollPos < servicesTop - 200 || scrollPos > servicesBottom + 200) {
                         serviceAnimated = false;
-                        $('.service-item').removeClass('mobile-animate');
+                        $('.service-item').removeClass('mobile-animate mobile-hover');
+                        serviceHovered = [];
                     }
                 }
             });
