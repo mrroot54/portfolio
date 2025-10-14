@@ -20,7 +20,7 @@
     <link rel="manifest" href="site.webmanifest">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -38,14 +38,17 @@
             --color-text-secondary: #a0a0a0;
             --color-accent: #e60023; /* Pin Red */
             --color-accent-hover: #ff0844;
+            --color-accent-light: rgba(230, 0, 35, 0.1);
             --color-border: #2a2a2a;
             --color-card: #161616;
             --color-code-bg: #0d1117;
             --color-code-text: #58a6ff;
+            --color-terminal-green: #4ade80;
             
             /* Fonts */
             --font-primary: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+            --font-code: 'Fira Code', monospace;
             --font-display: 'Space Grotesk', sans-serif;
             
             /* Spacing */
@@ -94,13 +97,13 @@
 
         h1 {
             font-size: clamp(3.2rem, 8vw, 6.4rem);
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: -0.02em;
         }
 
         h2 {
             font-size: clamp(2.8rem, 5vw, 4.8rem);
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: var(--spacing-md);
         }
 
@@ -135,7 +138,7 @@
             align-items: center;
             justify-content: center;
             font-family: var(--font-primary);
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.6rem;
             text-align: center;
             letter-spacing: 0.05em;
@@ -363,13 +366,14 @@
             transform: rotate(-45deg) translate(7px, -6px);
         }
 
-        /* Hero Section */
+        /* Hero Section - Clean Web Developer Design */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
+            padding: 100px 0 50px;
         }
 
         .hero-bg {
@@ -379,177 +383,359 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.4;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        /* Clean Particles */
+        .particles-clean {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Code Elements Background */
+        .code-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            overflow: hidden;
+        }
+
+        .code-line {
+            position: absolute;
+            font-family: var(--font-code);
+            color: var(--color-accent);
+            font-size: 1.4rem;
+            white-space: nowrap;
+            opacity: 0.5;
         }
 
         .hero-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-lg);
+            display: flex;
+            justify-content: center;
             align-items: center;
+            text-align: center;
         }
 
         .hero-content {
             z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .hero-subtitle {
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
             font-family: var(--font-mono);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: var(--color-accent);
-            margin-bottom: var(--spacing-sm);
-            display: inline-block;
+            margin-bottom: var(--spacing-md);
+            padding: 8px 16px;
+            background-color: rgba(230, 0, 35, 0.1);
+            border-radius: 50px;
+            border: 1px solid rgba(230, 0, 35, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .hero-badge i {
+            margin-right: 8px;
         }
 
         .hero-title {
             margin-bottom: var(--spacing-md);
             line-height: 1.1;
+            font-size: clamp(4rem, 8vw, 6rem);
+            font-weight: 900;
+        }
+
+        .hero-title span {
+            display: inline-block;
+            position: relative;
         }
 
         .hero-title .highlight {
             color: var(--color-accent);
             position: relative;
+            display: inline-block;
         }
 
         .hero-title .highlight::after {
             content: "";
             position: absolute;
-            bottom: 5px;
+            bottom: 8px;
             left: 0;
             width: 100%;
-            height: 10px;
-            background-color: rgba(230, 0, 35, 0.2);
+            height: 12px;
+            background-color: rgba(230, 0, 35, 0.15);
             z-index: -1;
+            border-radius: 6px;
         }
 
         .hero-description {
-            font-size: 1.8rem;
-            margin-bottom: var(--spacing-lg);
-            max-width: 500px;
+            font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+            margin-bottom: var(--spacing-xl);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            color: var(--color-text);
+            font-weight: 400;
         }
 
         .hero-buttons {
             display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-primary);
+            font-weight: 700;
+            font-size: clamp(1.5rem, 2vw, 1.7rem);
+            text-align: center;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 1.5rem 3rem;
+            border-radius: 8px;
+            background-color: var(--color-accent);
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            min-width: 200px;
+            box-shadow: 0 4px 15px rgba(230, 0, 35, 0.2);
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background-color: var(--color-accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(230, 0, 35, 0.4);
+        }
+
+        .btn--outline {
+            background-color: transparent;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+            box-shadow: none;
+        }
+
+        .btn--outline:hover {
+            background-color: var(--color-accent);
+            color: #ffffff;
+            box-shadow: 0 10px 25px rgba(230, 0, 35, 0.4);
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: var(--spacing-sm);
             margin-bottom: var(--spacing-lg);
         }
 
-        .hero-social {
-            display: flex;
-            gap: var(--spacing-md);
-        }
-
-        .hero-social a {
+        .tech-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--color-text);
-            font-size: 1.8rem;
+            font-family: var(--font-mono);
+            font-size: 1.4rem;
+            color: var(--color-text-secondary);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 6px 12px;
+            border-radius: 4px;
             transition: var(--transition);
         }
 
-        .hero-social a:hover {
-            background-color: var(--color-accent);
-            color: #ffffff;
-            transform: translateY(-3px);
+        .tech-item:hover {
+            background-color: rgba(230, 0, 35, 0.1);
+            color: var(--color-accent);
         }
 
-        .hero-image {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .tech-item i {
+            margin-right: 6px;
+            font-size: 1.6rem;
         }
 
-        .hero-image-container {
+        /* Code Preview */
+        .code-preview {
             position: relative;
-            width: 100%;
-            max-width: 450px;
-            aspect-ratio: 1/1;
-            border-radius: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: var(--color-code-bg);
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .hero-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-image-decoration {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 2px solid var(--color-accent);
-            border-radius: 20px;
-            top: 20px;
-            left: 20px;
-            z-index: -1;
-        }
-
-        .terminal {
-            position: absolute;
-            bottom: 30px;
-            right: -50px;
-            width: 200px;
-            background-color: var(--color-code-bg);
-            border-radius: 10px;
-            padding: var(--spacing-sm);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transform: rotate(5deg);
-            z-index: 3;
-        }
-
-        .terminal-header {
+        .code-tabs {
             display: flex;
-            align-items: center;
-            margin-bottom: var(--spacing-xs);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 6px;
-        }
-
-        .terminal-dot:nth-child(1) {
-            background-color: #ff5f56;
-        }
-
-        .terminal-dot:nth-child(2) {
-            background-color: #ffbd2e;
-        }
-
-        .terminal-dot:nth-child(3) {
-            background-color: #27c93f;
-        }
-
-        .terminal-body {
+        .code-tab {
+            padding: 12px 20px;
             font-family: var(--font-mono);
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 2px solid transparent;
+        }
+
+        .code-tab.active {
+            color: var(--color-text);
+            border-bottom-color: var(--color-accent);
+        }
+
+        .code-tab:hover {
+            color: var(--color-text);
+        }
+
+        .code-content {
+            padding: 20px;
+            font-family: var(--font-code);
+            font-size: 1.5rem;
             color: var(--color-code-text);
+            line-height: 1.6;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
         }
 
-        .typing-cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1.6rem;
-            background-color: var(--color-code-text);
-            animation: blink 1s infinite;
+        .code-content::-webkit-scrollbar {
+            width: 8px;
         }
 
-        @keyframes blink {
-            0%, 50% {
-                opacity: 1;
+        .code-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .code-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .code-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Responsive Styles for Hero */
+        @media (max-width: 992px) {
+            .hero {
+                padding: 80px 0 40px;
             }
-            51%, 100% {
-                opacity: 0;
+            
+            .hero-title {
+                font-size: clamp(3.5rem, 8vw, 5rem);
+            }
+            
+            .hero-description {
+                font-size: clamp(1.6rem, 2.5vw, 2rem);
+            }
+            
+            .code-preview {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 70px 0 30px;
+            }
+            
+            .hero-title {
+                font-size: clamp(3rem, 7vw, 4.5rem);
+            }
+            
+            .hero-description {
+                font-size: clamp(1.5rem, 2.5vw, 1.8rem);
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .tech-stack {
+                gap: var(--spacing-xs);
+            }
+            
+            .tech-item {
+                font-size: 1.2rem;
+                padding: 4px 8px;
+            }
+            
+            .code-content {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 60px 0 20px;
+            }
+            
+            .hero-title {
+                font-size: clamp(2.8rem, 7vw, 4rem);
+            }
+            
+            .hero-description {
+                font-size: clamp(1.4rem, 2.5vw, 1.6rem);
+            }
+            
+            .hero-badge {
+                font-size: 1.4rem;
+            }
+            
+            .btn {
+                font-size: 1.5rem;
+                padding: 1.2rem 2rem;
+            }
+            
+            .code-preview {
+                max-width: 95%;
+            }
+            
+            .code-content {
+                font-size: 1.2rem;
             }
         }
 
@@ -857,7 +1043,7 @@
 
         .service-title {
             font-family: var(--font-display);
-            font-size: 2.2rem; /* Increased font size */
+            font-size: 2.2rem;
             font-weight: 600;
             margin-bottom: 15px;
             color: var(--color-text);
@@ -1466,20 +1652,6 @@
 
         /* Responsive Styles */
         @media (max-width: 992px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-image {
-                order: -1;
-                margin-bottom: var(--spacing-lg);
-            }
-
-            .terminal {
-                display: none;
-            }
-
             .about-container {
                 grid-template-columns: 1fr;
             }
@@ -1529,11 +1701,6 @@
             .mobile-menu-toggle {
                 display: flex;
                 z-index: 1000;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
             }
 
             .grid-2,
@@ -1602,10 +1769,6 @@
                 font-size: clamp(1.8rem, 4vw, 2.2rem);
             }
 
-            .hero-description {
-                font-size: 1.6rem;
-            }
-
             .about-text {
                 font-size: 1.6rem;
             }
@@ -1648,7 +1811,7 @@
 
             /* Service title responsive size */
             .service-title {
-                font-size: 2rem; /* Adjusted for mobile */
+                font-size: 2rem;
             }
         }
     </style>
@@ -1688,54 +1851,74 @@
         </div>
     </header>
 
-    <!-- # hero section
+    <!-- # hero section - Clean Web Developer Design
     ================================================== -->
     <section class="hero section" id="home">
         <div class="hero-bg">
-            <canvas id="particles-canvas"></canvas>
+            <canvas id="particles-canvas" class="particles-clean"></canvas>
+            <div class="code-bg">
+                <div class="code-line" style="top: 5%; left: 10%;">const developer = {</div>
+                <div class="code-line" style="top: 15%; right: 15%;">function createApp() {</div>
+                <div class="code-line" style="top: 25%; left: 20%;">class WebDeveloper {</div>
+                <div class="code-line" style="top: 35%; right: 10%;">return response.json();</div>
+                <div class="code-line" style="top: 45%; left: 15%;">const api = new REST();</div>
+                <div class="code-line" style="top: 55%; right: 20%;">db.query('SELECT * FROM users');</div>
+                <div class="code-line" style="top: 65%; left: 25%;">export default function App() {</div>
+                <div class="code-line" style="top: 75%; right: 5%;">import React from 'react';</div>
+                <div class="code-line" style="top: 85%; left: 30%;">const secure = true;</div>
+            </div>
         </div>
         
         <div class="container container-wide">
             <div class="hero-container">
                 <div class="hero-content fade-in">
-                    <div class="hero-subtitle">Hello, I'm</div>
+                    <div class="hero-badge">
+                        <i class="fas fa-code"></i> Web Developer
+                    </div>
                     <h1 class="hero-title">
-                        Atul Kumar<br>
-                        <span class="highlight">PHP Developer</span> &<br>
-                        <span class="highlight">Cybersecurity Expert</span>
+                        Hi, I'm <span class="highlight">Atul Kumar</span><br>
+                        Building Secure &<br>
+                        Scalable Web Apps
                     </h1>
                     <p class="hero-description">
-                        I build secure web applications with PHP and CodeIgniter 4, bringing my ethical hacking background to create robust and safe digital solutions.
+                        I specialize in PHP development with CodeIgniter 4, creating secure and efficient web applications. With a background in cybersecurity, I bring a unique perspective to web development that prioritizes both functionality and security.
                     </p>
+                    
+                    <div class="tech-stack">
+                        <div class="tech-item"><i class="fab fa-php"></i> PHP</div>
+                        <div class="tech-item"><i class="fab fa-html5"></i> HTML5</div>
+                        <div class="tech-item"><i class="fab fa-css3-alt"></i> CSS3</div>
+                        <div class="tech-item"><i class="fab fa-js"></i> JavaScript</div>
+                        <div class="tech-item"><i class="fas fa-database"></i> MySQL</div>
+                    </div>
                     
                     <div class="hero-buttons">
                         <a href="#projects" class="btn">View My Work</a>
                         <a href="#contact" class="btn btn--outline">Get In Touch</a>
                     </div>
                     
-                    <div class="hero-social">
-                        <a href="https://github.com/mrroot54/" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                
-                <div class="hero-image fade-in">
-                    <div class="hero-image-container">
-                        <img src="https://picsum.photos/seed/atulkumar/600/600.jpg" alt="Atul Kumar">
-                    </div>
-                    <div class="hero-image-decoration"></div>
-                    
-                    <div class="terminal">
-                        <div class="terminal-header">
-                            <div class="terminal-dot"></div>
-                            <div class="terminal-dot"></div>
-                            <div class="terminal-dot"></div>
+                    <div class="code-preview">
+                        <div class="code-tabs">
+                            <div class="code-tab active" data-tab="php">PHP</div>
+                            <div class="code-tab" data-tab="javascript">JavaScript</div>
+                            <div class="code-tab" data-tab="sql">SQL</div>
                         </div>
-                        <div class="terminal-body">
-                            <p>$ ./secure_app.sh</p>
-                            <p>Building secure app...<span class="typing-cursor"></span></p>
+                        <div class="code-content" id="code-content">
+                            <pre><code>class SecureWebApp extends BaseController {
+    public function __construct() {
+        parent::__construct();
+        $this->load->library('session');
+        $this->load->helper('security');
+    }
+    
+    public function index() {
+        $data = [
+            'title' => 'Secure Web Application',
+            'user' => $this->session->get('user_data')
+        ];
+        return view('dashboard', $data);
+    }
+}</code></pre>
                         </div>
                     </div>
                 </div>
@@ -2214,89 +2397,152 @@
             $(window).on('scroll', animateOnScroll);
             animateOnScroll(); // Initial check
             
-            // Particles background for hero section
-            const canvas = document.getElementById('particles-canvas');
-            const ctx = canvas.getContext('2d');
-            
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
+            // Clean particles background for hero section
+            const particlesCanvas = document.getElementById('particles-canvas');
+            const particlesCtx = particlesCanvas.getContext('2d');
+
+            function resizeParticlesCanvas() {
+                particlesCanvas.width = window.innerWidth;
+                particlesCanvas.height = window.innerHeight;
+            }
+
+            resizeParticlesCanvas();
+            window.addEventListener('resize', resizeParticlesCanvas);
+
             const particles = [];
-            const particleCount = 100;
-            
+            const particleCount = window.innerWidth < 768 ? 30 : 50;
+            const connectionDistance = window.innerWidth < 768 ? 100 : 150;
+
             class Particle {
                 constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 3 + 1;
-                    this.speedX = Math.random() * 0.5 - 0.25;
-                    this.speedY = Math.random() * 0.5 - 0.25;
-                    this.opacity = Math.random() * 0.5 + 0.2;
+                    this.x = Math.random() * particlesCanvas.width;
+                    this.y = Math.random() * particlesCanvas.height;
+                    this.size = Math.random() * 2 + 1;
+                    this.speedX = Math.random() * 0.3 - 0.15;
+                    this.speedY = Math.random() * 0.3 - 0.15;
+                    this.opacity = Math.random() * 0.3 + 0.1;
+                    this.color = `rgba(230, 0, 35, ${this.opacity})`;
                 }
                 
                 update() {
                     this.x += this.speedX;
                     this.y += this.speedY;
                     
-                    if (this.x > canvas.width || this.x < 0) {
+                    if (this.x > particlesCanvas.width || this.x < 0) {
                         this.speedX = -this.speedX;
                     }
                     
-                    if (this.y > canvas.height || this.y < 0) {
+                    if (this.y > particlesCanvas.height || this.y < 0) {
                         this.speedY = -this.speedY;
                     }
                 }
                 
                 draw() {
-                    ctx.fillStyle = `rgba(230, 0, 35, ${this.opacity})`;
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
+                    particlesCtx.fillStyle = this.color;
+                    particlesCtx.beginPath();
+                    particlesCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    particlesCtx.fill();
                 }
             }
-            
-            function init() {
+
+            function initParticles() {
+                particles.length = 0;
                 for (let i = 0; i < particleCount; i++) {
                     particles.push(new Particle());
                 }
             }
-            
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            function animateParticles() {
+                particlesCtx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
                 
                 for (let i = 0; i < particles.length; i++) {
                     particles[i].update();
                     particles[i].draw();
                 }
                 
-                // Draw connections
+                // Draw connections with fewer connections for cleaner look
                 for (let i = 0; i < particles.length; i++) {
                     for (let j = i + 1; j < particles.length; j++) {
                         const dx = particles[i].x - particles[j].x;
                         const dy = particles[i].y - particles[j].y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         
-                        if (distance < 100) {
-                            ctx.strokeStyle = `rgba(230, 0, 35, ${0.2 * (1 - distance / 100)})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
+                        if (distance < connectionDistance && Math.random() > 0.98) { // Randomly show connections
+                            particlesCtx.strokeStyle = `rgba(230, 0, 35, ${0.1 * (1 - distance / connectionDistance)})`;
+                            particlesCtx.lineWidth = 0.5;
+                            particlesCtx.beginPath();
+                            particlesCtx.moveTo(particles[i].x, particles[i].y);
+                            particlesCtx.lineTo(particles[j].x, particles[j].y);
+                            particlesCtx.stroke();
                         }
                     }
                 }
                 
-                requestAnimationFrame(animate);
+                requestAnimationFrame(animateParticles);
             }
+
+            initParticles();
+            animateParticles();
             
-            init();
-            animate();
+            // Code tabs functionality
+            const codeTabs = document.querySelectorAll('.code-tab');
+            const codeContent = document.getElementById('code-content');
             
-            // Resize canvas on window resize
-            $(window).on('resize', function() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
+            const codeExamples = {
+                php: `<pre><code>class SecureWebApp extends BaseController {
+    public function __construct() {
+        parent::__construct();
+        $this->load->library('session');
+        $this->load->helper('security');
+    }
+    
+    public function index() {
+        $data = [
+            'title' => 'Secure Web Application',
+            'user' => $this->session->get('user_data')
+        ];
+        return view('dashboard', $data);
+    }
+}</code></pre>`,
+                javascript: `<pre><code>class SecureWebApp {
+    constructor() {
+        this.session = new SessionManager();
+        this.security = new SecurityHelper();
+    }
+    
+    async index() {
+        const data = {
+            title: 'Secure Web Application',
+            user: await this.session.getUserData()
+        };
+        return this.renderView('dashboard', data);
+    }
+}</code></pre>`,
+                sql: `<pre><code>CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Create index for faster queries
+CREATE INDEX idx_users_email ON users(email);</code></pre>`
+            };
+            
+            codeTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    codeTabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Update code content
+                    const tabName = tab.getAttribute('data-tab');
+                    codeContent.innerHTML = codeExamples[tabName];
+                });
             });
             
             // Service Modal functionality - Enhanced
@@ -2488,24 +2734,11 @@
             let lastScrollTop = 0;
             let scrollTimer = null;
             let animatedItems = new Set(); // Track which items have been animated
-            let isTouchScrolling = false; // Track if scroll is triggered by touch
-            
-            // Touch event handlers to detect touch scrolling
-            document.addEventListener('touchstart', function() {
-                isTouchScrolling = true;
-            }, { passive: true });
-            
-            document.addEventListener('touchend', function() {
-                // Reset the flag after a short delay to allow regular scroll events
-                setTimeout(() => {
-                    isTouchScrolling = false;
-                }, 100);
-            }, { passive: true });
             
             // Scroll event handler for mobile
             $(window).on('scroll', function() {
-                // Only proceed if we're on mobile and it's not a touch-triggered scroll
-                if (window.innerWidth <= 768 && !isTouchScrolling) {
+                // Only proceed if we're on mobile
+                if (window.innerWidth <= 768) {
                     const servicesSection = $('#services');
                     const servicesTop = servicesSection.offset().top;
                     const servicesBottom = servicesTop + servicesSection.outerHeight();
