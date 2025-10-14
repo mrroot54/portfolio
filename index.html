@@ -366,7 +366,7 @@
             transform: rotate(-45deg) translate(7px, -6px);
         }
 
-        /* Hero Section - Clean Web Developer Design */
+        /* Hero Section - Advanced */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -383,11 +383,21 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
         }
 
-        /* Clean Particles */
-        .particles-clean {
+        /* Matrix Rain Effect */
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        /* Advanced Particles */
+        .particles-advanced {
             position: absolute;
             top: 0;
             left: 0;
@@ -396,25 +406,33 @@
             z-index: -1;
         }
 
-        /* Code Elements Background */
-        .code-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.03;
-            overflow: hidden;
-        }
-
-        .code-line {
+        /* Floating Code Elements */
+        .floating-code {
             position: absolute;
             font-family: var(--font-code);
-            color: var(--color-accent);
+            color: rgba(230, 0, 35, 0.3);
             font-size: 1.4rem;
             white-space: nowrap;
-            opacity: 0.5;
+            z-index: -1;
+            opacity: 0;
+            animation: floatCode 20s infinite linear;
+        }
+
+        @keyframes floatCode {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         .hero-container {
@@ -422,39 +440,67 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
         }
 
         .hero-content {
             z-index: 2;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
+            width: 100%;
         }
 
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            font-family: var(--font-mono);
-            font-size: 1.6rem;
+        .hero-subtitle {
+            font-family: var(--font-code);
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
             color: var(--color-accent);
             margin-bottom: var(--spacing-md);
-            padding: 8px 16px;
+            display: inline-block;
+            padding: 10px 20px;
             background-color: rgba(230, 0, 35, 0.1);
-            border-radius: 50px;
-            border: 1px solid rgba(230, 0, 35, 0.2);
+            border-radius: 4px;
+            border-left: 3px solid var(--color-accent);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
+            letter-spacing: 2px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-badge i {
+        .hero-subtitle::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(230, 0, 35, 0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            20%, 100% {
+                left: 100%;
+            }
+        }
+
+        .terminal-prompt {
+            color: var(--color-accent);
             margin-right: 8px;
         }
 
         .hero-title {
-            margin-bottom: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
             line-height: 1.1;
-            font-size: clamp(4rem, 8vw, 6rem);
+            font-size: clamp(3.5rem, 7vw, 6rem);
             font-weight: 900;
+            position: relative;
         }
 
         .hero-title span {
@@ -462,33 +508,104 @@
             position: relative;
         }
 
+        .code-tag {
+            font-family: var(--font-code);
+            font-size: 0.4em;
+            color: var(--color-text-secondary);
+            opacity: 0.7;
+            display: block;
+            margin: 10px 0;
+            font-weight: 400;
+        }
+
         .hero-title .highlight {
             color: var(--color-accent);
             position: relative;
             display: inline-block;
+            background: linear-gradient(90deg, var(--color-accent), #ff0844);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(230, 0, 35, 0.3);
         }
 
         .hero-title .highlight::after {
             content: "";
             position: absolute;
-            bottom: 8px;
+            bottom: 5px;
             left: 0;
             width: 100%;
-            height: 12px;
-            background-color: rgba(230, 0, 35, 0.15);
+            height: 15px;
+            background-color: rgba(230, 0, 35, 0.1);
             z-index: -1;
-            border-radius: 6px;
+            border-radius: 4px;
+        }
+
+        .glitch {
+            position: relative;
+            color: var(--color-text);
+            font-size: inherit;
+            font-weight: inherit;
+            text-transform: uppercase;
+            text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                        -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                        0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            animation: glitch 1s linear infinite;
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                            -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+                            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            14% {
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                            -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+                            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            15% {
+                text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            49% {
+                text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            50% {
+                text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                            0.05em 0 0 rgba(0, 255, 0, 0.75),
+                            0 -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            99% {
+                text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                            0.05em 0 0 rgba(0, 255, 0, 0.75),
+                            0 -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            100% {
+                text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
+                            -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
+                            -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
         }
 
         .hero-description {
-            font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
             margin-bottom: var(--spacing-xl);
-            max-width: 700px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            line-height: 1.6;
-            color: var(--color-text);
+            line-height: 1.7;
             font-weight: 400;
+        }
+
+        .code-comment {
+            color: var(--color-text-secondary);
+            font-family: var(--font-code);
+            font-size: 0.9em;
+            font-style: italic;
         }
 
         .hero-buttons {
@@ -505,12 +622,12 @@
             justify-content: center;
             font-family: var(--font-primary);
             font-weight: 700;
-            font-size: clamp(1.5rem, 2vw, 1.7rem);
+            font-size: clamp(1.4rem, 2vw, 1.6rem);
             text-align: center;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            padding: 1.5rem 3rem;
-            border-radius: 8px;
+            padding: 1.4rem 2.8rem;
+            border-radius: 0.4rem;
             background-color: var(--color-accent);
             color: #ffffff;
             border: none;
@@ -537,10 +654,16 @@
             left: 100%;
         }
 
+        .code-bracket {
+            font-family: var(--font-code);
+            font-weight: 700;
+            margin: 0 5px;
+        }
+
         .btn:hover {
             background-color: var(--color-accent-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(230, 0, 35, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(230, 0, 35, 0.4);
         }
 
         .btn--outline {
@@ -553,120 +676,147 @@
         .btn--outline:hover {
             background-color: var(--color-accent);
             color: #ffffff;
-            box-shadow: 0 10px 25px rgba(230, 0, 35, 0.4);
+            box-shadow: 0 15px 25px rgba(230, 0, 35, 0.4);
         }
 
-        /* Tech Stack */
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .tech-item {
-            display: flex;
-            align-items: center;
-            font-family: var(--font-mono);
-            font-size: 1.4rem;
-            color: var(--color-text-secondary);
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 6px 12px;
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-
-        .tech-item:hover {
-            background-color: rgba(230, 0, 35, 0.1);
-            color: var(--color-accent);
-        }
-
-        .tech-item i {
-            margin-right: 6px;
-            font-size: 1.6rem;
-        }
-
-        /* Code Preview */
-        .code-preview {
+        /* Advanced Code Terminal */
+        .code-terminal {
             position: relative;
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto;
             background-color: var(--color-code-bg);
-            border-radius: 12px;
+            border-radius: 10px;
+            padding: 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transform: rotate(-2deg);
+            z-index: 3;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(230, 0, 35, 0.2);
+            width: 100%;
         }
 
-        .code-tabs {
+        .terminal-header {
             display: flex;
+            align-items: center;
+            padding: 12px 15px;
             background-color: rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .code-tab {
-            padding: 12px 20px;
-            font-family: var(--font-mono);
-            font-size: 1.4rem;
-            color: var(--color-text-secondary);
-            cursor: pointer;
-            transition: var(--transition);
-            border-bottom: 2px solid transparent;
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
         }
 
-        .code-tab.active {
-            color: var(--color-text);
-            border-bottom-color: var(--color-accent);
+        .terminal-dot:nth-child(1) {
+            background-color: #ff5f56;
         }
 
-        .code-tab:hover {
-            color: var(--color-text);
+        .terminal-dot:nth-child(2) {
+            background-color: #ffbd2e;
         }
 
-        .code-content {
-            padding: 20px;
+        .terminal-dot:nth-child(3) {
+            background-color: #27c93f;
+        }
+
+        .terminal-body {
             font-family: var(--font-code);
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
             color: var(--color-code-text);
-            line-height: 1.6;
+            padding: 20px;
             text-align: left;
-            max-height: 200px;
-            overflow-y: auto;
+            line-height: 1.6;
         }
 
-        .code-content::-webkit-scrollbar {
-            width: 8px;
+        .terminal-output {
+            color: var(--color-terminal-green);
+            margin-left: 20px;
+            margin-top: 5px;
         }
 
-        .code-content::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.8rem;
+            background-color: var(--color-code-text);
+            animation: blink 1s infinite;
         }
 
-        .code-content::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
         }
 
-        .code-content::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.3);
+        /* Floating Code Elements */
+        .code-element {
+            position: absolute;
+            font-family: var(--font-code);
+            color: rgba(230, 0, 35, 0.4);
+            font-size: clamp(1rem, 1.5vw, 1.6rem);
+            white-space: nowrap;
+            z-index: 1;
+            opacity: 0;
+            animation: float 15s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         /* Responsive Styles for Hero */
+        @media (max-width: 1200px) {
+            .hero {
+                padding: 90px 0 40px;
+            }
+            
+            .hero-title {
+                font-size: clamp(3.2rem, 7vw, 5.5rem);
+            }
+            
+            .hero-description {
+                font-size: clamp(1.5rem, 2.5vw, 2rem);
+            }
+            
+            .code-terminal {
+                max-width: 90%;
+            }
+        }
+
         @media (max-width: 992px) {
             .hero {
                 padding: 80px 0 40px;
             }
             
             .hero-title {
-                font-size: clamp(3.5rem, 8vw, 5rem);
+                font-size: clamp(3rem, 6.5vw, 5rem);
             }
             
             .hero-description {
-                font-size: clamp(1.6rem, 2.5vw, 2rem);
+                font-size: clamp(1.4rem, 2.5vw, 1.8rem);
             }
             
-            .code-preview {
+            .code-terminal {
+                transform: rotate(0deg);
                 max-width: 90%;
             }
         }
@@ -677,16 +827,17 @@
             }
             
             .hero-title {
-                font-size: clamp(3rem, 7vw, 4.5rem);
+                font-size: clamp(2.8rem, 6vw, 4.5rem);
             }
             
             .hero-description {
-                font-size: clamp(1.5rem, 2.5vw, 1.8rem);
+                font-size: clamp(1.3rem, 2.5vw, 1.6rem);
             }
             
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: var(--spacing-sm);
             }
             
             .btn {
@@ -694,17 +845,12 @@
                 max-width: 300px;
             }
             
-            .tech-stack {
-                gap: var(--spacing-xs);
-            }
-            
-            .tech-item {
-                font-size: 1.2rem;
-                padding: 4px 8px;
-            }
-            
-            .code-content {
+            .terminal-body {
                 font-size: 1.3rem;
+            }
+            
+            .code-element {
+                font-size: 1.2rem;
             }
         }
 
@@ -714,28 +860,64 @@
             }
             
             .hero-title {
-                font-size: clamp(2.8rem, 7vw, 4rem);
+                font-size: clamp(2.5rem, 5.5vw, 4rem);
             }
             
             .hero-description {
-                font-size: clamp(1.4rem, 2.5vw, 1.6rem);
+                font-size: clamp(1.2rem, 2.5vw, 1.5rem);
             }
             
-            .hero-badge {
-                font-size: 1.4rem;
+            .hero-subtitle {
+                font-size: 1.6rem;
+                padding: 8px 16px;
             }
             
             .btn {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
                 padding: 1.2rem 2rem;
+                min-width: 180px;
             }
             
-            .code-preview {
+            .code-terminal {
                 max-width: 95%;
             }
             
-            .code-content {
+            .terminal-body {
                 font-size: 1.2rem;
+            }
+            
+            .code-element {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 50px 0 20px;
+            }
+            
+            .hero-title {
+                font-size: clamp(2.2rem, 5vw, 3.5rem);
+            }
+            
+            .hero-description {
+                font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            }
+            
+            .hero-subtitle {
+                font-size: 1.4rem;
+                padding: 6px 12px;
+            }
+            
+            .btn {
+                font-size: 1.3rem;
+                padding: 1rem 1.8rem;
+                min-width: 160px;
+            }
+            
+            .terminal-body {
+                font-size: 1.1rem;
+                padding: 15px;
             }
         }
 
@@ -1851,74 +2033,65 @@
         </div>
     </header>
 
-    <!-- # hero section - Clean Web Developer Design
+    <!-- # hero section - Advanced
     ================================================== -->
     <section class="hero section" id="home">
         <div class="hero-bg">
-            <canvas id="particles-canvas" class="particles-clean"></canvas>
-            <div class="code-bg">
-                <div class="code-line" style="top: 5%; left: 10%;">const developer = {</div>
-                <div class="code-line" style="top: 15%; right: 15%;">function createApp() {</div>
-                <div class="code-line" style="top: 25%; left: 20%;">class WebDeveloper {</div>
-                <div class="code-line" style="top: 35%; right: 10%;">return response.json();</div>
-                <div class="code-line" style="top: 45%; left: 15%;">const api = new REST();</div>
-                <div class="code-line" style="top: 55%; right: 20%;">db.query('SELECT * FROM users');</div>
-                <div class="code-line" style="top: 65%; left: 25%;">export default function App() {</div>
-                <div class="code-line" style="top: 75%; right: 5%;">import React from 'react';</div>
-                <div class="code-line" style="top: 85%; left: 30%;">const secure = true;</div>
-            </div>
+            <canvas id="particles-canvas" class="particles-advanced"></canvas>
+            <canvas id="matrix-rain" class="matrix-rain"></canvas>
         </div>
+        
+        <!-- Floating Code Elements -->
+        <div class="code-element" style="top: 10%; left: 5%; animation-delay: 0s;">const secure = true;</div>
+        <div class="code-element" style="top: 20%; right: 10%; animation-delay: 2s;">function encrypt(data) {</div>
+        <div class="code-element" style="top: 30%; left: 15%; animation-delay: 4s;">if (vulnerability) {</div>
+        <div class="code-element" style="top: 40%; right: 5%; animation-delay: 6s;">return hash.sha256(input);</div>
+        <div class="code-element" style="top: 50%; left: 8%; animation-delay: 8s;">class SecurityExpert {</div>
+        <div class="code-element" style="top: 60%; right: 12%; animation-delay: 10s;">const api = new REST();</div>
+        <div class="code-element" style="top: 70%; left: 20%; animation-delay: 12s;">db.query('SELECT * FROM users');</div>
+        <div class="code-element" style="top: 80%; right: 8%; animation-delay: 14s;">export default function App() {</div>
         
         <div class="container container-wide">
             <div class="hero-container">
                 <div class="hero-content fade-in">
-                    <div class="hero-badge">
-                        <i class="fas fa-code"></i> Web Developer
+                    <div class="hero-subtitle">
+                        <span class="terminal-prompt">$</span> whoami
                     </div>
                     <h1 class="hero-title">
-                        Hi, I'm <span class="highlight">Atul Kumar</span><br>
-                        Building Secure &<br>
-                        Scalable Web Apps
+                        <span class="code-tag">&lt;h1&gt;</span>
+                        <span class="glitch">Atul Kumar</span><br>
+                        <span class="highlight">PHP Developer</span> &<br>
+                        <span class="highlight">Cybersecurity Expert</span>
+                        <span class="code-tag">&lt;/h1&gt;</span>
                     </h1>
                     <p class="hero-description">
-                        I specialize in PHP development with CodeIgniter 4, creating secure and efficient web applications. With a background in cybersecurity, I bring a unique perspective to web development that prioritizes both functionality and security.
+                        <span class="code-comment">// I build secure web applications with PHP and CodeIgniter 4</span><br>
+                        <span class="code-comment">// Bringing my ethical hacking background to create robust solutions</span><br>
+                        <span class="code-comment">// Specializing in penetration testing and vulnerability assessment</span>
                     </p>
                     
-                    <div class="tech-stack">
-                        <div class="tech-item"><i class="fab fa-php"></i> PHP</div>
-                        <div class="tech-item"><i class="fab fa-html5"></i> HTML5</div>
-                        <div class="tech-item"><i class="fab fa-css3-alt"></i> CSS3</div>
-                        <div class="tech-item"><i class="fab fa-js"></i> JavaScript</div>
-                        <div class="tech-item"><i class="fas fa-database"></i> MySQL</div>
-                    </div>
-                    
                     <div class="hero-buttons">
-                        <a href="#projects" class="btn">View My Work</a>
-                        <a href="#contact" class="btn btn--outline">Get In Touch</a>
+                        <a href="#projects" class="btn">
+                            <span class="code-bracket">{</span> View My Work <span class="code-bracket">}</span>
+                        </a>
+                        <a href="#contact" class="btn btn--outline">
+                            <span class="code-bracket">{</span> Get In Touch <span class="code-bracket">}</span>
+                        </a>
                     </div>
                     
-                    <div class="code-preview">
-                        <div class="code-tabs">
-                            <div class="code-tab active" data-tab="php">PHP</div>
-                            <div class="code-tab" data-tab="javascript">JavaScript</div>
-                            <div class="code-tab" data-tab="sql">SQL</div>
+                    <div class="code-terminal">
+                        <div class="terminal-header">
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
                         </div>
-                        <div class="code-content" id="code-content">
-                            <pre><code>class SecureWebApp extends BaseController {
-    public function __construct() {
-        parent::__construct();
-        $this->load->library('session');
-        $this->load->helper('security');
-    }
-    
-    public function index() {
-        $data = [
-            'title' => 'Secure Web Application',
-            'user' => $this->session->get('user_data')
-        ];
-        return view('dashboard', $data);
-    }
-}</code></pre>
+                        <div class="terminal-body">
+                            <p><span class="terminal-prompt">$</span> ./secure_app.sh</p>
+                            <p>Building secure app...<span class="typing-cursor"></span></p>
+                            <p><span class="terminal-output">✓ Authentication module initialized</span></p>
+                            <p><span class="terminal-output">✓ Security protocols enabled</span></p>
+                            <p><span class="terminal-output">✓ Database connections secured</span></p>
+                            <p><span class="terminal-output">✓ Vulnerability scan completed</span></p>
                         </div>
                     </div>
                 </div>
@@ -2397,7 +2570,7 @@
             $(window).on('scroll', animateOnScroll);
             animateOnScroll(); // Initial check
             
-            // Clean particles background for hero section
+            // Advanced particles background for hero section
             const particlesCanvas = document.getElementById('particles-canvas');
             const particlesCtx = particlesCanvas.getContext('2d');
 
@@ -2410,17 +2583,17 @@
             window.addEventListener('resize', resizeParticlesCanvas);
 
             const particles = [];
-            const particleCount = window.innerWidth < 768 ? 30 : 50;
-            const connectionDistance = window.innerWidth < 768 ? 100 : 150;
+            const particleCount = window.innerWidth < 768 ? 50 : 100;
+            const connectionDistance = window.innerWidth < 768 ? 80 : 120;
 
             class Particle {
                 constructor() {
                     this.x = Math.random() * particlesCanvas.width;
                     this.y = Math.random() * particlesCanvas.height;
                     this.size = Math.random() * 2 + 1;
-                    this.speedX = Math.random() * 0.3 - 0.15;
-                    this.speedY = Math.random() * 0.3 - 0.15;
-                    this.opacity = Math.random() * 0.3 + 0.1;
+                    this.speedX = Math.random() * 0.5 - 0.25;
+                    this.speedY = Math.random() * 0.5 - 0.25;
+                    this.opacity = Math.random() * 0.5 + 0.2;
                     this.color = `rgba(230, 0, 35, ${this.opacity})`;
                 }
                 
@@ -2460,15 +2633,15 @@
                     particles[i].draw();
                 }
                 
-                // Draw connections with fewer connections for cleaner look
+                // Draw connections
                 for (let i = 0; i < particles.length; i++) {
                     for (let j = i + 1; j < particles.length; j++) {
                         const dx = particles[i].x - particles[j].x;
                         const dy = particles[i].y - particles[j].y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         
-                        if (distance < connectionDistance && Math.random() > 0.98) { // Randomly show connections
-                            particlesCtx.strokeStyle = `rgba(230, 0, 35, ${0.1 * (1 - distance / connectionDistance)})`;
+                        if (distance < connectionDistance) {
+                            particlesCtx.strokeStyle = `rgba(230, 0, 35, ${0.2 * (1 - distance / connectionDistance)})`;
                             particlesCtx.lineWidth = 0.5;
                             particlesCtx.beginPath();
                             particlesCtx.moveTo(particles[i].x, particles[i].y);
@@ -2484,65 +2657,112 @@
             initParticles();
             animateParticles();
             
-            // Code tabs functionality
-            const codeTabs = document.querySelectorAll('.code-tab');
-            const codeContent = document.getElementById('code-content');
-            
-            const codeExamples = {
-                php: `<pre><code>class SecureWebApp extends BaseController {
-    public function __construct() {
-        parent::__construct();
-        $this->load->library('session');
-        $this->load->helper('security');
-    }
-    
-    public function index() {
-        $data = [
-            'title' => 'Secure Web Application',
-            'user' => $this->session->get('user_data')
-        ];
-        return view('dashboard', $data);
-    }
-}</code></pre>`,
-                javascript: `<pre><code>class SecureWebApp {
-    constructor() {
-        this.session = new SessionManager();
-        this.security = new SecurityHelper();
-    }
-    
-    async index() {
-        const data = {
-            title: 'Secure Web Application',
-            user: await this.session.getUserData()
-        };
-        return this.renderView('dashboard', data);
-    }
-}</code></pre>`,
-                sql: `<pre><code>CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+            // Matrix Rain Effect
+            const matrixCanvas = document.getElementById('matrix-rain');
+            const matrixCtx = matrixCanvas.getContext('2d');
 
--- Create index for faster queries
-CREATE INDEX idx_users_email ON users(email);</code></pre>`
-            };
+            function resizeMatrixCanvas() {
+                matrixCanvas.width = window.innerWidth;
+                matrixCanvas.height = window.innerHeight;
+            }
+
+            resizeMatrixCanvas();
+            window.addEventListener('resize', resizeMatrixCanvas);
+
+            const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+            const matrixCharArray = matrixChars.split("");
+            const fontSize = 10;
+            const columns = matrixCanvas.width / fontSize;
+            const drops = [];
+
+            for (let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+
+            function drawMatrix() {
+                matrixCtx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+                matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+                
+                matrixCtx.fillStyle = '#0F0';
+                matrixCtx.font = fontSize + 'px monospace';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = matrixCharArray[Math.floor(Math.random() * matrixCharArray.length)];
+                    matrixCtx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            setInterval(drawMatrix, 35);
             
-            codeTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    // Remove active class from all tabs
-                    codeTabs.forEach(t => t.classList.remove('active'));
+            // Typing effect for terminal
+            const terminalBody = document.querySelector('.terminal-body');
+            const terminalText = [
+                '$ ./secure_app.sh',
+                'Building secure app...',
+                '✓ Authentication module initialized',
+                '✓ Security protocols enabled',
+                '✓ Database connections secured',
+                '✓ Vulnerability scan completed'
+            ];
+
+            let lineIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let typingSpeed = 50;
+
+            function typeTerminal() {
+                if (lineIndex < terminalText.length) {
+                    const currentLine = terminalText[lineIndex];
                     
-                    // Add active class to clicked tab
-                    tab.classList.add('active');
+                    if (!isDeleting && charIndex <= currentLine.length) {
+                        // Add character
+                        const lineElement = terminalBody.children[lineIndex] || document.createElement('p');
+                        if (!terminalBody.children[lineIndex]) {
+                            terminalBody.appendChild(lineElement);
+                        }
+                        
+                        if (lineIndex === 0) {
+                            lineElement.innerHTML = `<span class="terminal-prompt">$</span> ${currentLine.substring(0, charIndex)}<span class="typing-cursor"></span>`;
+                        } else if (lineIndex === 1) {
+                            lineElement.innerHTML = `${currentLine.substring(0, charIndex)}<span class="typing-cursor"></span>`;
+                        } else {
+                            lineElement.className = 'terminal-output';
+                            lineElement.innerHTML = currentLine.substring(0, charIndex);
+                        }
+                        
+                        charIndex++;
+                        
+                        if (charIndex > currentLine.length) {
+                            // Move to next line after a pause
+                            setTimeout(() => {
+                                lineIndex++;
+                                charIndex = 0;
+                                typeTerminal();
+                            }, 1000);
+                            return;
+                        }
+                    }
                     
-                    // Update code content
-                    const tabName = tab.getAttribute('data-tab');
-                    codeContent.innerHTML = codeExamples[tabName];
-                });
+                    setTimeout(typeTerminal, typingSpeed);
+                } else {
+                    // Restart animation after a delay
+                    setTimeout(() => {
+                        terminalBody.innerHTML = '';
+                        lineIndex = 0;
+                        charIndex = 0;
+                        typeTerminal();
+                    }, 5000);
+                }
+            }
+
+            // Start typing animation when page loads
+            window.addEventListener('load', () => {
+                setTimeout(typeTerminal, 1000);
             });
             
             // Service Modal functionality - Enhanced
