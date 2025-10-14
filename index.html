@@ -989,29 +989,6 @@
             }
         }
 
-        /* Mobile touch animation */
-        .service-item.touch-animate {
-            animation: touchAnimation 1.5s ease forwards;
-        }
-
-        @keyframes touchAnimation {
-            0% {
-                transform: translateY(0) scale(1);
-            }
-            25% {
-                transform: translateY(-10px) scale(1.05);
-            }
-            50% {
-                transform: translateY(-15px) scale(1.03);
-            }
-            75% {
-                transform: translateY(-10px) scale(1.02);
-            }
-            100% {
-                transform: translateY(0) scale(1);
-            }
-        }
-
         /* Contact Section - Modified to match the screenshot */
         .contact {
             background-color: var(--color-bg);
@@ -2507,21 +2484,14 @@
                 $('.service-loading').removeClass('service-loading');
             }, 2000);
             
-            // Mobile touch animation for services - Fixed
+            // Mobile scroll animation for services - Fixed
             let lastScrollTop = 0;
-            let touchStartY = 0;
-            let isScrolling = false;
+            let scrollTimer = null;
+            let animatedItems = new Set(); // Track which items have been animated
             
-            // Touch event handlers for mobile
-            document.addEventListener('touchstart', function(e) {
-                touchStartY = e.touches[0].clientY;
-                isScrolling = false;
-            }, { passive: true });
-            
-            document.addEventListener('touchmove', function(e) {
-                isScrolling = true;
-                
-                // Only proceed if we're on mobile and in the services section
+            // Scroll event handler for mobile
+            $(window).on('scroll', function() {
+                // Only proceed if we're on mobile
                 if (window.innerWidth <= 768) {
                     const servicesSection = $('#services');
                     const servicesTop = servicesSection.offset().top;
@@ -2530,38 +2500,35 @@
                     
                     // Check if we're in the services section
                     if (scrollPos + window.innerHeight > servicesTop && scrollPos < servicesBottom) {
-                        const touchY = e.touches[0].clientY;
-                        const touchDiff = touchStartY - touchY;
-                        
                         // Get all service items
                         const serviceItems = $('.service-item');
                         
                         // Find which service item is currently in view
-                        serviceItems.each(function() {
+                        serviceItems.each(function(index) {
                             const $this = $(this);
                             const itemTop = $this.offset().top;
                             const itemBottom = itemTop + $this.outerHeight();
+                            const itemId = `service-${index}`;
                             
                             // Check if this item is in the viewport
                             if (scrollPos + window.innerHeight > itemTop && scrollPos < itemBottom) {
-                                // Check if we're scrolling up or down
-                                const currentScrollTop = $(window).scrollTop();
-                                const isScrollingDown = currentScrollTop > lastScrollTop;
-                                
-                                // Only animate if we're actually scrolling
-                                if (Math.abs(touchDiff) > 5) {
+                                // Only animate if this item hasn't been animated yet
+                                if (!animatedItems.has(itemId)) {
+                                    // Add to animated items set
+                                    animatedItems.add(itemId);
+                                    
                                     // Remove any existing animation classes
-                                    $this.removeClass('touch-animate');
+                                    $this.removeClass('mobile-animate');
                                     
                                     // Force reflow
                                     void $this[0].offsetWidth;
                                     
                                     // Add animation class
-                                    $this.addClass('touch-animate');
+                                    $this.addClass('mobile-animate');
                                     
                                     // Remove animation class after animation completes
                                     setTimeout(() => {
-                                        $this.removeClass('touch-animate');
+                                        $this.removeClass('mobile-animate');
                                     }, 1500);
                                 }
                             }
@@ -2570,56 +2537,21 @@
                 }
                 
                 lastScrollTop = $(window).scrollTop();
-            }, { passive: true });
+            });
             
-            // Handle scroll events for non-touch devices
+            // Reset animated items when scrolling away from services section
             $(window).on('scroll', function() {
-                // Only proceed if we're on mobile and not using touch
-                if (window.innerWidth <= 768 && !isScrolling) {
+                if (window.innerWidth <= 768) {
                     const servicesSection = $('#services');
                     const servicesTop = servicesSection.offset().top;
                     const servicesBottom = servicesTop + servicesSection.outerHeight();
                     const scrollPos = $(window).scrollTop();
                     
-                    // Check if we're in the services section
-                    if (scrollPos + window.innerHeight > servicesTop && scrollPos < servicesBottom) {
-                        // Get all service items
-                        const serviceItems = $('.service-item');
-                        
-                        // Find which service item is currently in view
-                        serviceItems.each(function() {
-                            const $this = $(this);
-                            const itemTop = $this.offset().top;
-                            const itemBottom = itemTop + $this.outerHeight();
-                            
-                            // Check if this item is in the viewport
-                            if (scrollPos + window.innerHeight > itemTop && scrollPos < itemBottom) {
-                                // Check if we're scrolling up or down
-                                const currentScrollTop = $(window).scrollTop();
-                                const isScrollingDown = currentScrollTop > lastScrollTop;
-                                
-                                // Only animate if we're actually scrolling
-                                if (Math.abs(currentScrollTop - lastScrollTop) > 5) {
-                                    // Remove any existing animation classes
-                                    $this.removeClass('touch-animate');
-                                    
-                                    // Force reflow
-                                    void $this[0].offsetWidth;
-                                    
-                                    // Add animation class
-                                    $this.addClass('touch-animate');
-                                    
-                                    // Remove animation class after animation completes
-                                    setTimeout(() => {
-                                        $this.removeClass('touch-animate');
-                                    }, 1500);
-                                }
-                            }
-                        });
+                    // If we're far away from the services section, reset the animated items
+                    if (scrollPos < servicesTop - 200 || scrollPos > servicesBottom + 200) {
+                        animatedItems.clear();
                     }
                 }
-                
-                lastScrollTop = $(window).scrollTop();
             });
         });
     </script>
