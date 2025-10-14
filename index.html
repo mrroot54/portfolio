@@ -768,13 +768,6 @@
             overflow: hidden;
             border: 1px solid rgba(230, 0, 35, 0.1);
             backdrop-filter: blur(5px);
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .service-item.animate {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .service-item::before {
@@ -790,8 +783,7 @@
             z-index: -1;
         }
 
-        .service-item:hover::before,
-        .service-item.mobile-hover::before {
+        .service-item:hover::before {
             opacity: 1;
         }
 
@@ -808,13 +800,11 @@
             z-index: -1;
         }
 
-        .service-item:hover::after,
-        .service-item.mobile-hover::after {
+        .service-item:hover::after {
             opacity: 1;
         }
 
-        .service-item:hover,
-        .service-item.mobile-hover {
+        .service-item:hover {
             transform: translateY(-15px) scale(1.03);
             box-shadow: 0 20px 40px rgba(230, 0, 35, 0.3);
             border-color: rgba(230, 0, 35, 0.5);
@@ -850,20 +840,17 @@
             z-index: -1;
         }
 
-        .service-item:hover .service-icon,
-        .service-item.mobile-hover .service-icon {
+        .service-item:hover .service-icon {
             transform: scale(1.1) rotate(5deg);
             box-shadow: 0 10px 20px rgba(230, 0, 35, 0.4);
         }
 
-        .service-item:hover .service-icon::before,
-        .service-item.mobile-hover .service-icon::before {
+        .service-item:hover .service-icon::before {
             width: 100%;
             height: 100%;
         }
 
-        .service-item:hover .service-icon i,
-        .service-item.mobile-hover .service-icon i {
+        .service-item:hover .service-icon i {
             color: #ffffff;
             transform: scale(0.9);
         }
@@ -889,8 +876,7 @@
             transition: width 0.3s ease;
         }
 
-        .service-item:hover .service-title::after,
-        .service-item.mobile-hover .service-title::after {
+        .service-item:hover .service-title::after {
             width: 100%;
         }
 
@@ -925,13 +911,11 @@
             transition: transform 0.3s ease;
         }
 
-        .service-link:hover::before,
-        .service-item.mobile-hover .service-link::before {
+        .service-link:hover::before {
             transform: translateX(0);
         }
 
-        .service-link:hover,
-        .service-item.mobile-hover .service-link {
+        .service-link:hover {
             color: var(--color-accent-hover);
         }
 
@@ -940,14 +924,12 @@
             transition: transform 0.3s ease;
         }
 
-        .service-link:hover i,
-        .service-item.mobile-hover .service-link i {
+        .service-link:hover i {
             transform: translateX(5px);
         }
 
         /* Glitch effect for service items */
-        .service-item:hover .service-icon,
-        .service-item.mobile-hover .service-icon {
+        .service-item:hover .service-icon {
             animation: glitch 0.3s infinite;
         }
 
@@ -984,14 +966,13 @@
             transition: opacity 0.3s ease;
         }
 
-        .service-item:hover .service-code,
-        .service-item.mobile-hover .service-code {
+        .service-item:hover .service-code {
             opacity: 1;
         }
 
         /* Mobile scroll animation for services */
         .service-item.mobile-animate {
-            animation: mobileScrollAnimation 0.8s ease forwards;
+            animation: mobileScrollAnimation 1.5s ease forwards;
         }
 
         @keyframes mobileScrollAnimation {
@@ -1004,6 +985,29 @@
             }
             100% {
                 opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Mobile touch animation */
+        .service-item.touch-animate {
+            animation: touchAnimation 1.5s ease forwards;
+        }
+
+        @keyframes touchAnimation {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+            25% {
+                transform: translateY(-10px) scale(1.05);
+            }
+            50% {
+                transform: translateY(-15px) scale(1.03);
+            }
+            75% {
+                transform: translateY(-10px) scale(1.02);
+            }
+            100% {
                 transform: translateY(0) scale(1);
             }
         }
@@ -2503,57 +2507,119 @@
                 $('.service-loading').removeClass('service-loading');
             }, 2000);
             
-            // Mobile scroll animation for services - Fixed
-            let serviceAnimated = false;
-            let serviceHovered = [];
+            // Mobile touch animation for services - Fixed
+            let lastScrollTop = 0;
+            let touchStartY = 0;
+            let isScrolling = false;
             
-            function animateServicesOnMobile() {
-                if (window.innerWidth <= 768) {
-                    const servicesSection = $('#services');
-                    const servicesTop = servicesSection.offset().top;
-                    const scrollPos = $(window).scrollTop();
-                    const windowHeight = $(window).height();
-                    
-                    if (scrollPos + windowHeight > servicesTop && !serviceAnimated) {
-                        $('.service-item').each(function(index) {
-                            const $this = $(this);
-                            setTimeout(() => {
-                                $this.addClass('mobile-animate');
-                                
-                                // Apply hover effect after animation completes
-                                setTimeout(() => {
-                                    $this.addClass('mobile-hover');
-                                    serviceHovered.push(index);
-                                    
-                                    // Remove hover effect after a few seconds
-                                    setTimeout(() => {
-                                        $this.removeClass('mobile-hover');
-                                    }, 3000);
-                                }, 800);
-                            }, index * 300);
-                        });
-                        serviceAnimated = true;
-                    }
-                }
-            }
+            // Touch event handlers for mobile
+            document.addEventListener('touchstart', function(e) {
+                touchStartY = e.touches[0].clientY;
+                isScrolling = false;
+            }, { passive: true });
             
-            $(window).on('scroll', animateServicesOnMobile);
-            animateServicesOnMobile(); // Initial check
-            
-            // Reset animation flag when scrolling away from services section
-            $(window).on('scroll', function() {
+            document.addEventListener('touchmove', function(e) {
+                isScrolling = true;
+                
+                // Only proceed if we're on mobile and in the services section
                 if (window.innerWidth <= 768) {
                     const servicesSection = $('#services');
                     const servicesTop = servicesSection.offset().top;
                     const servicesBottom = servicesTop + servicesSection.outerHeight();
                     const scrollPos = $(window).scrollTop();
                     
-                    if (scrollPos < servicesTop - 200 || scrollPos > servicesBottom + 200) {
-                        serviceAnimated = false;
-                        $('.service-item').removeClass('mobile-animate mobile-hover');
-                        serviceHovered = [];
+                    // Check if we're in the services section
+                    if (scrollPos + window.innerHeight > servicesTop && scrollPos < servicesBottom) {
+                        const touchY = e.touches[0].clientY;
+                        const touchDiff = touchStartY - touchY;
+                        
+                        // Get all service items
+                        const serviceItems = $('.service-item');
+                        
+                        // Find which service item is currently in view
+                        serviceItems.each(function() {
+                            const $this = $(this);
+                            const itemTop = $this.offset().top;
+                            const itemBottom = itemTop + $this.outerHeight();
+                            
+                            // Check if this item is in the viewport
+                            if (scrollPos + window.innerHeight > itemTop && scrollPos < itemBottom) {
+                                // Check if we're scrolling up or down
+                                const currentScrollTop = $(window).scrollTop();
+                                const isScrollingDown = currentScrollTop > lastScrollTop;
+                                
+                                // Only animate if we're actually scrolling
+                                if (Math.abs(touchDiff) > 5) {
+                                    // Remove any existing animation classes
+                                    $this.removeClass('touch-animate');
+                                    
+                                    // Force reflow
+                                    void $this[0].offsetWidth;
+                                    
+                                    // Add animation class
+                                    $this.addClass('touch-animate');
+                                    
+                                    // Remove animation class after animation completes
+                                    setTimeout(() => {
+                                        $this.removeClass('touch-animate');
+                                    }, 1500);
+                                }
+                            }
+                        });
                     }
                 }
+                
+                lastScrollTop = $(window).scrollTop();
+            }, { passive: true });
+            
+            // Handle scroll events for non-touch devices
+            $(window).on('scroll', function() {
+                // Only proceed if we're on mobile and not using touch
+                if (window.innerWidth <= 768 && !isScrolling) {
+                    const servicesSection = $('#services');
+                    const servicesTop = servicesSection.offset().top;
+                    const servicesBottom = servicesTop + servicesSection.outerHeight();
+                    const scrollPos = $(window).scrollTop();
+                    
+                    // Check if we're in the services section
+                    if (scrollPos + window.innerHeight > servicesTop && scrollPos < servicesBottom) {
+                        // Get all service items
+                        const serviceItems = $('.service-item');
+                        
+                        // Find which service item is currently in view
+                        serviceItems.each(function() {
+                            const $this = $(this);
+                            const itemTop = $this.offset().top;
+                            const itemBottom = itemTop + $this.outerHeight();
+                            
+                            // Check if this item is in the viewport
+                            if (scrollPos + window.innerHeight > itemTop && scrollPos < itemBottom) {
+                                // Check if we're scrolling up or down
+                                const currentScrollTop = $(window).scrollTop();
+                                const isScrollingDown = currentScrollTop > lastScrollTop;
+                                
+                                // Only animate if we're actually scrolling
+                                if (Math.abs(currentScrollTop - lastScrollTop) > 5) {
+                                    // Remove any existing animation classes
+                                    $this.removeClass('touch-animate');
+                                    
+                                    // Force reflow
+                                    void $this[0].offsetWidth;
+                                    
+                                    // Add animation class
+                                    $this.addClass('touch-animate');
+                                    
+                                    // Remove animation class after animation completes
+                                    setTimeout(() => {
+                                        $this.removeClass('touch-animate');
+                                    }, 1500);
+                                }
+                            }
+                        });
+                    }
+                }
+                
+                lastScrollTop = $(window).scrollTop();
             });
         });
     </script>
