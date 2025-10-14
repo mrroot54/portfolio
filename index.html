@@ -768,6 +768,13 @@
             overflow: hidden;
             border: 1px solid rgba(230, 0, 35, 0.1);
             backdrop-filter: blur(5px);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .service-item.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .service-item::before {
@@ -857,7 +864,7 @@
 
         .service-title {
             font-family: var(--font-display);
-            font-size: 1.8rem;
+            font-size: 2.2rem; /* Increased font size */
             font-weight: 600;
             margin-bottom: 15px;
             color: var(--color-text);
@@ -968,6 +975,25 @@
 
         .service-item:hover .service-code {
             opacity: 1;
+        }
+
+        /* Mobile scroll animation for services */
+        .service-item.mobile-animate {
+            animation: mobileScrollAnimation 0.8s ease forwards;
+        }
+
+        @keyframes mobileScrollAnimation {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            50% {
+                transform: translateY(-5px) scale(1.02);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         /* Contact Section - Modified to match the screenshot */
@@ -1551,6 +1577,11 @@
                 width: 90%;
                 padding: 30px 20px;
             }
+
+            /* Mobile service animation adjustments */
+            .service-item {
+                margin-bottom: 20px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1620,6 +1651,11 @@
             .services-title::before,
             .services-title::after {
                 display: none;
+            }
+
+            /* Service title responsive size */
+            .service-title {
+                font-size: 2rem; /* Adjusted for mobile */
             }
         }
     </style>
@@ -2454,6 +2490,45 @@
             setTimeout(() => {
                 $('.service-loading').removeClass('service-loading');
             }, 2000);
+            
+            // Mobile scroll animation for services
+            let serviceAnimated = false;
+            
+            function animateServicesOnMobile() {
+                if (window.innerWidth <= 768 && !serviceAnimated) {
+                    const servicesSection = $('#services');
+                    const servicesTop = servicesSection.offset().top;
+                    const scrollPos = $(window).scrollTop();
+                    const windowHeight = $(window).height();
+                    
+                    if (scrollPos + windowHeight > servicesTop) {
+                        $('.service-item').each(function(index) {
+                            setTimeout(() => {
+                                $(this).addClass('mobile-animate');
+                            }, index * 200);
+                        });
+                        serviceAnimated = true;
+                    }
+                }
+            }
+            
+            $(window).on('scroll', animateServicesOnMobile);
+            animateServicesOnMobile(); // Initial check
+            
+            // Reset animation flag when scrolling away from services section
+            $(window).on('scroll', function() {
+                if (window.innerWidth <= 768) {
+                    const servicesSection = $('#services');
+                    const servicesTop = servicesSection.offset().top;
+                    const servicesBottom = servicesTop + servicesSection.outerHeight();
+                    const scrollPos = $(window).scrollTop();
+                    
+                    if (scrollPos < servicesTop - 200 || scrollPos > servicesBottom + 200) {
+                        serviceAnimated = false;
+                        $('.service-item').removeClass('mobile-animate');
+                    }
+                }
+            });
         });
     </script>
 </body>
