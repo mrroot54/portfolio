@@ -976,7 +976,7 @@
             transform: translateY(-5px);
         }
 
-        /* Modern Home Button - New Design */
+        /* Modern Home Button - Fixed Design */
         .home-button {
             position: fixed;
             bottom: 30px;
@@ -989,6 +989,7 @@
             z-index: 999;
             transition: var(--transition);
             cursor: pointer;
+            text-decoration: none; /* Added to remove underline */
         }
         
         .home-button-inner {
@@ -1071,7 +1072,7 @@
             animation: pulse 2s infinite;
         }
         
-        /* Tooltip */
+        /* Tooltip - Fixed to show on hover only */
         .home-tooltip {
             position: absolute;
             bottom: 70px;
@@ -1087,6 +1088,7 @@
             visibility: hidden;
             transition: var(--transition);
             z-index: 1000;
+            pointer-events: none; /* Added to prevent tooltip from interfering with clicks */
         }
         
         .home-tooltip::after {
@@ -1523,9 +1525,9 @@
         <i class="fas fa-arrow-up"></i>
     </a>
     
-    <!-- # modern home button
+    <!-- # modern home button - Fixed to work with single click
     ================================================== -->
-    <div class="home-button" id="home-button">
+    <div class="home-button" id="home-button" onclick="goToHome()">
         <div class="home-button-inner">
             <i class="fas fa-home"></i>
             <div class="home-particles" id="home-particles"></div>
@@ -1815,17 +1817,6 @@
                 }
             }
             
-            // Modern Home Button functionality
-            $('#home-button').on('click', function() {
-                // Create particle explosion effect
-                createParticleExplosion();
-                
-                // Redirect to home page after a short delay
-                setTimeout(function() {
-                    window.location.href = 'index.html';
-                }, 300);
-            });
-            
             // Create particle explosion effect
             function createParticleExplosion() {
                 const particlesContainer = $('#home-particles');
@@ -1872,6 +1863,55 @@
                 }
             }
         });
+        
+        // Direct function for home button click - Fixed to work with single click
+        function goToHome() {
+            // Create particle explosion effect
+            const particlesContainer = document.getElementById('home-particles');
+            particlesContainer.innerHTML = '';
+            
+            for (let i = 0; i < 12; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size
+                const size = Math.random() * 6 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.top = '50%';
+                particle.style.left = '50%';
+                particle.style.transform = 'translate(-50%, -50%)';
+                
+                particlesContainer.appendChild(particle);
+                
+                // Animate particle
+                const angle = (Math.PI * 2 * i) / 12;
+                const velocity = 50 + Math.random() * 50;
+                const lifetime = 800 + Math.random() * 400;
+                
+                $(particle).animate({
+                    opacity: 1,
+                    top: `calc(50% + ${Math.sin(angle) * velocity}px)`,
+                    left: `calc(50% + ${Math.cos(angle) * velocity}px)`
+                }, {
+                    duration: lifetime,
+                    easing: 'easeOutQuart',
+                    complete: function() {
+                        $(particle).animate({
+                            opacity: 0
+                        }, {
+                            duration: 200,
+                            complete: function() {
+                                particle.remove();
+                            }
+                        });
+                    }
+                });
+            }
+            
+            // Redirect to home page immediately
+            window.location.href = 'index.html';
+        }
     </script>
 </body>
 </html>
