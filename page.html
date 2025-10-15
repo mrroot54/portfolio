@@ -34,8 +34,8 @@
             --color-bg: #0a0a0a;
             --color-bg-alt: #121212;
             --color-bg-section: #1a1a1a;
-            --color-text: #e0e0e0;
-            --color-text-secondary: #a0a0a0;
+            --color-text: #f0f0f0; /* Increased brightness for better contrast */
+            --color-text-secondary: #b8b8b8; /* Increased brightness for better readability */
             --color-accent: #e60023; /* Pin Red */
             --color-accent-hover: #ff0844;
             --color-accent-light: rgba(230, 0, 35, 0.1);
@@ -79,8 +79,8 @@
             background-color: var(--color-bg);
             color: var(--color-text);
             font-family: var(--font-primary);
-            font-size: 1.6rem;
-            line-height: 1.6;
+            font-size: 1.8rem; /* Increased from 1.6rem for better readability */
+            line-height: 1.8; /* Increased from 1.6 for better readability */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
@@ -102,7 +102,7 @@
         }
 
         h2 {
-            font-size: clamp(3.2rem, 5vw, 5rem); /* Increased from 2.8rem to 3.2rem */
+            font-size: clamp(3.2rem, 5vw, 5rem);
             font-weight: 700;
             margin-bottom: var(--spacing-md);
         }
@@ -118,8 +118,42 @@
         }
 
         p {
-            margin-bottom: var(--spacing-sm);
+            margin-bottom: 1.8rem; /* Increased from var(--spacing-sm) for better spacing */
             color: var(--color-text-secondary);
+            font-size: 1.8rem; /* Explicitly set for paragraphs */
+            line-height: 1.8; /* Explicitly set for paragraphs */
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Added subtle text shadow for better contrast */
+            letter-spacing: 0.02em; /* Added slight letter spacing for better readability */
+        }
+
+        /* Enhanced paragraph styling for different sections */
+        .project-info p {
+            background-color: rgba(255, 255, 255, 0.03); /* Subtle background for paragraphs */
+            padding: 1.5rem; /* Added padding */
+            border-radius: 8px; /* Added border radius */
+            border-left: 3px solid var(--color-accent); /* Added accent border */
+            margin-bottom: 2rem; /* Increased margin */
+            transition: var(--transition);
+        }
+
+        .project-info p:hover {
+            background-color: rgba(255, 255, 255, 0.05); /* Slightly brighter on hover */
+            transform: translateX(5px); /* Subtle animation on hover */
+        }
+
+        .project-hero-description {
+            font-size: clamp(1.8rem, 2.5vw, 2.4rem); /* Increased from 1.6rem */
+            margin-bottom: var(--spacing-xl);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8; /* Increased from 1.7 */
+            font-weight: 400;
+            color: var(--color-text); /* Changed from secondary to primary for better visibility */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Stronger text shadow */
+            padding: 1.5rem; /* Added padding */
+            background-color: rgba(0, 0, 0, 0.3); /* Added background for contrast */
+            border-radius: 10px; /* Added border radius */
         }
 
         a {
@@ -523,23 +557,6 @@
             }
         }
 
-        .project-hero-description {
-            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-            margin-bottom: var(--spacing-xl);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.7;
-            font-weight: 400;
-        }
-
-        .code-comment {
-            color: var(--color-text-secondary);
-            font-family: var(--font-code);
-            font-size: 0.9em;
-            font-style: italic;
-        }
-
         .project-hero-buttons {
             display: flex;
             gap: var(--spacing-md);
@@ -675,6 +692,7 @@
             position: relative;
             font-size: 1.6rem;
             color: var(--color-text-secondary);
+            line-height: 1.7; /* Added line height for better readability */
         }
 
         .feature-list li::before {
@@ -695,6 +713,7 @@
             position: relative;
             font-size: 1.6rem;
             color: var(--color-text-secondary);
+            line-height: 1.7; /* Added line height for better readability */
         }
 
         .benefit-list li::before {
@@ -1284,6 +1303,22 @@
                 font-size: 1.6rem;
                 bottom: 20px;
                 right: 20px;
+            }
+            
+            /* Enhanced paragraph readability on mobile */
+            p {
+                font-size: 1.7rem; /* Slightly smaller for mobile but still readable */
+                line-height: 1.7;
+            }
+            
+            .project-info p {
+                padding: 1.2rem; /* Slightly smaller padding for mobile */
+                margin-bottom: 1.5rem;
+            }
+            
+            .project-hero-description {
+                font-size: 1.7rem;
+                padding: 1.2rem;
             }
         }
     </style>
