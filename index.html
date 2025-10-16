@@ -885,10 +885,6 @@
             .terminal-body {
                 font-size: 1.2rem;
             }
-            
-            .code-element {
-                font-size: 1rem;
-            }
         }
 
         @media (max-width: 480px) {
@@ -977,85 +973,239 @@
             color: var(--color-text);
         }
 
-        /* Projects Section */
+        /* Projects Section - Enhanced */
         .projects {
             background-color: var(--color-bg);
+            position: relative;
+        }
+
+        .projects::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(230, 0, 35, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(230, 0, 35, 0.05) 0%, transparent 50%);
+            z-index: 0;
         }
 
         .projects-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: var(--spacing-lg);
+            position: relative;
+            z-index: 1;
         }
 
         .project-card {
             background-color: var(--color-card);
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 1px solid rgba(230, 0, 35, 0.1);
+        }
+
+        .project-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(230, 0, 35, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(230, 0, 35, 0.2);
+            border-color: rgba(230, 0, 35, 0.3);
         }
 
         .project-image {
-            height: 200px;
+            height: 280px;
             overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+        }
+
+        .project-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8) 100%);
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-image::before {
+            opacity: 1;
         }
 
         .project-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: brightness(0.9);
         }
 
         .project-card:hover .project-image img {
-            transform: scale(1.05);
+            transform: scale(1.1);
+            filter: brightness(1.1);
         }
 
         .project-content {
             padding: var(--spacing-md);
+            position: relative;
+            z-index: 2;
         }
 
         .project-title {
             margin-bottom: var(--spacing-xs);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--color-text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-title .emoji {
+            font-size: 2rem;
         }
 
         .project-description {
             font-size: 1.5rem;
             margin-bottom: var(--spacing-sm);
+            color: var(--color-text-secondary);
+            line-height: 1.6;
         }
 
         .project-tech {
             display: flex;
             flex-wrap: wrap;
             gap: var(--spacing-xs);
-            margin-bottom: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
         }
 
         .tech-tag {
-            padding: 0.3rem 0.8rem;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 4px;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, rgba(230, 0, 35, 0.1) 0%, rgba(230, 0, 35, 0.05) 100%);
+            border: 1px solid rgba(230, 0, 35, 0.2);
+            border-radius: 20px;
             font-size: 1.2rem;
-            color: var(--color-text-secondary);
+            color: var(--color-text);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(230, 0, 35, 0.2);
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
         }
 
         .project-links {
             display: flex;
-            gap: var(--spacing-sm);
+            gap: var(--spacing-md);
+            align-items: center;
         }
 
         .project-link {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: var(--spacing-xs);
             font-size: 1.4rem;
             color: var(--color-accent);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(230, 0, 35, 0.1);
+            transition: left 0.3s ease;
+        }
+
+        .project-link:hover::before {
+            left: 0;
+        }
+
+        .project-link:hover {
+            color: var(--color-accent-hover);
+            transform: translateX(5px);
+        }
+
+        .project-link i {
+            font-size: 1.6rem;
+            transition: transform 0.3s ease;
+        }
+
+        .project-link:hover i {
+            transform: scale(1.2);
+        }
+
+        /* Project Loading Animation */
+        .project-card.loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card.loading::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: projectLoading 1.5s infinite;
+        }
+
+        @keyframes projectLoading {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Project Image Fallback */
+        .project-image-fallback {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            color: var(--color-text-secondary);
+            font-size: 1.4rem;
+            font-family: var(--font-code);
         }
 
         /* Services Section - Enhanced with animations */
@@ -1378,6 +1528,19 @@
             letter-spacing: 2px;
             margin-bottom: 40px;
             color: var(--color-text);
+            position: relative;
+            display: inline-block;
+        }
+
+        .contact-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-accent);
         }
 
         .contact-message {
@@ -1850,6 +2013,10 @@
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .projects-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
         }
 
         @media (max-width: 768px) {
@@ -1924,6 +2091,10 @@
             .service-item {
                 margin-bottom: 20px;
             }
+
+            .project-image {
+                height: 220px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1994,6 +2165,14 @@
             /* Service title responsive size */
             .service-title {
                 font-size: 2rem;
+            }
+
+            .project-image {
+                height: 200px;
+            }
+
+            .project-title {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -2110,7 +2289,7 @@
             <div class="about-container">
                 <div class="about-image fade-in">
                     <div class="about-image-container">
-                        <img src="https://picsum.photos/seed/atulkumar2/500/600.jpg" alt="Atul Kumar">
+                        <img src="images/profile/Atul-kumar.png" alt="Atul Kumar">
                     </div>
                 </div>
                 
@@ -2131,13 +2310,13 @@
                         <div class="skill">Penetration Testing</div>
                     </div>
                     
-                    <a href="Atul-Kumar.pdf" class="btn" download>Download CV</a>
+                    <a href="resume/Atul-Kumar.pdf" class="btn" download>Download CV</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- # projects section
+    <!-- # projects section - Enhanced
     ================================================== -->
     <section class="projects section" id="projects">
         <div class="container container-wide">
@@ -2146,32 +2325,51 @@
             </div>
             
             <div class="projects-container">
-                <div class="project-card fade-in">
+                <div class="project-card fade-in loading">
                     <div class="project-image">
-                        <img src="https://picsum.photos/seed/integritycheck/600/400.jpg" alt="IntegrityCheck">
+                        <img src="images/projects/profile/1.png" alt="IntegrityCheck" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="project-image-fallback" style="display: none;">
+                            <div>
+                                <i class="fas fa-shield-alt" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                                <div>IntegrityCheck</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">🔐 IntegrityCheck</h3>
+                        <h3 class="project-title">
+                            <span class="emoji">🔐</span>
+                            IntegrityCheck
+                        </h3>
                         <p class="project-description">
                             A lightweight tool designed to maintain data integrity and detect file tampering using SHA-256 cryptographic hashing.
                         </p>
                         <div class="project-tech">
                             <div class="tech-tag">Python 3</div>
                             <div class="tech-tag">hashlib</div>
+                            <div class="tech-tag">Cryptography</div>
                         </div>
                         <div class="project-links">
-                            <a href="page.html" class="project-link"><i class="fas fa-eye"></i> View</a>
-                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="project.html?project=integritycheck" class="project-link"><i class="fas fa-eye"></i> View</a>
+                            <a href="https://github.com/mrroot54/IntegrityCheck" target="_blank" class="project-link"><i class="fab fa-github"></i> Code</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card fade-in">
+                <div class="project-card fade-in loading">
                     <div class="project-image">
-                        <img src="https://picsum.photos/seed/edufinancehub/600/400.jpg" alt="EduFinanceHub">
+                        <img src="https://picsum.photos/seed/edufinancehub/600/400.jpg" alt="EduFinanceHub" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="project-image-fallback" style="display: none;">
+                            <div>
+                                <i class="fas fa-graduation-cap" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                                <div>EduFinanceHub</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">EduFinanceHub</h3>
+                        <h3 class="project-title">
+                            <span class="emoji">🎓</span>
+                            EduFinanceHub
+                        </h3>
                         <p class="project-description">
                             A web application built to manage student records and their associated financial transactions.
                         </p>
@@ -2183,38 +2381,57 @@
                             <div class="tech-tag">MySQL</div>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fas fa-eye"></i> View</a>
+                            <a href="project.html?project=edufinancehub" class="project-link"><i class="fas fa-eye"></i> View</a>
                             <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card fade-in">
+                <div class="project-card fade-in loading">
                     <div class="project-image">
-                        <img src="https://picsum.photos/seed/safecrypt/600/400.jpg" alt="SafeCrypt">
+                        <img src="https://picsum.photos/seed/safecrypt/600/400.jpg" alt="SafeCrypt" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="project-image-fallback" style="display: none;">
+                            <div>
+                                <i class="fas fa-lock" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                                <div>SafeCrypt</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">🔐 SafeCrypt</h3>
+                        <h3 class="project-title">
+                            <span class="emoji">🔐</span>
+                            SafeCrypt
+                        </h3>
                         <p class="project-description">
                             A lightweight tool that allows users to encrypt and decrypt files or folders with ease.
                         </p>
                         <div class="project-tech">
                             <div class="tech-tag">Python</div>
                             <div class="tech-tag">Cryptography</div>
+                            <div class="tech-tag">AES</div>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fas fa-eye"></i> View</a>
+                            <a href="project.html?project=safecrypt" class="project-link"><i class="fas fa-eye"></i> View</a>
                             <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card fade-in">
+                <div class="project-card fade-in loading">
                     <div class="project-image">
-                        <img src="https://picsum.photos/seed/backup/600/400.jpg" alt="Remote Backup Encryption Tool">
+                        <img src="https://picsum.photos/seed/backup/600/400.jpg" alt="Remote Backup Encryption Tool" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="project-image-fallback" style="display: none;">
+                            <div>
+                                <i class="fas fa-server" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                                <div>Backup Tool</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">💾 Remote Backup Encryption Tool</h3>
+                        <h3 class="project-title">
+                            <span class="emoji">💾</span>
+                            Remote Backup Encryption Tool
+                        </h3>
                         <p class="project-description">
                             A Bash script that automates the process of creating encrypted backups of local directories and securely transferring them to a remote server.
                         </p>
@@ -2225,18 +2442,27 @@
                             <div class="tech-tag">Cron</div>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fas fa-eye"></i> View</a>
+                            <a href="project.html?project=backup" class="project-link"><i class="fas fa-eye"></i> View</a>
                             <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card fade-in">
+                <div class="project-card fade-in loading">
                     <div class="project-image">
-                        <img src="https://picsum.photos/seed/saadiwala/600/400.jpg" alt="SaadiWala.com">
+                        <img src="https://picsum.photos/seed/saadiwala/600/400.jpg" alt="SaadiWala.com" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="project-image-fallback" style="display: none;">
+                            <div>
+                                <i class="fas fa-hotel" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                                <div>SaadiWala.com</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">🏨 SaadiWala.com</h3>
+                        <h3 class="project-title">
+                            <span class="emoji">🏨</span>
+                            SaadiWala.com
+                        </h3>
                         <p class="project-description">
                             A live, fully functional web platform designed to help users book hotels and resorts or make quick inquiries online.
                         </p>
@@ -2254,12 +2480,21 @@
                     </div>
                 </div>
                 
-                <div class="project-card fade-in">
+                <div class="project-card fade-in loading">
                     <div class="project-image">
-                        <img src="https://picsum.photos/seed/autogitsync/600/400.jpg" alt="AutoGitSync">
+                        <img src="https://picsum.photos/seed/autogitsync/600/400.jpg" alt="AutoGitSync" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="project-image-fallback" style="display: none;">
+                            <div>
+                                <i class="fas fa-code-branch" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                                <div>AutoGitSync</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">🚀 AutoGitSync</h3>
+                        <h3 class="project-title">
+                            <span class="emoji">🚀</span>
+                            AutoGitSync
+                        </h3>
                         <p class="project-description">
                             A Bash script designed to automate the process of synchronizing a local web project directory with a GitHub repository.
                         </p>
@@ -2269,7 +2504,7 @@
                             <div class="tech-tag">GitHub API</div>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fas fa-eye"></i> View</a>
+                            <a href="project.html?project=autogitsync" class="project-link"><i class="fas fa-eye"></i> View</a>
                             <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
                         </div>
                     </div>
@@ -2392,7 +2627,9 @@
     ================================================== -->
     <section class="contact section" id="contact">
         <div class="contact-container">
-            <h2 class="contact-title fade-in">GET IN TOUCH</h2>
+            <div class="section-title fade-in">
+                <h2 class="contact-title">GET IN TOUCH</h2>
+            </div>
             <p class="contact-message fade-in">
                 I love to hear from you. Whether you have a question or just want to chat about design, tech & art — shoot me a message.
             </p>
@@ -2434,9 +2671,7 @@
                 </div>
             </div>
             
-            <div class="copyright fade-in">
-                © 2025 Atul Kumar. All Rights Reserved.
-            </div>
+          
         </div>
     </section>
 
@@ -2445,15 +2680,10 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-social">
-                    <a href="https://github.com/mrroot54/" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                </div>
+           
                 
                 <div class="footer-copyright">
-                    <p>&copy; 2025 Atul Kumar. All Rights Reserved. Design by <a href="#">Atul Kumar</a></p>
+<p>&copy; © 2025 All Rights Reserved. Design by <a href="#">Atul Kumar</a></p>
                 </div>
             </div>
         </div>
@@ -2469,6 +2699,238 @@
     ================================================== -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
+        // Project Data - यहाँ सभी प्रोजेक्ट्स का डेटा है
+        const projectsData = {
+            "integritycheck": {
+                title: "IntegrityCheck",
+                category: "security tool",
+                description: "A lightweight tool designed to maintain data integrity and detect file tampering using SHA-256 cryptographic hashing.",
+                image: "images/projects/profile/1.png",
+                githubUrl: "https://github.com/mrroot54/IntegrityCheck",
+                liveUrl: "",
+                info: [
+                    "IntegrityCheck is a powerful yet lightweight security tool designed to help users maintain the integrity of their important files and directories. By utilizing SHA-256 cryptographic hashing, this tool can detect even the smallest changes to files, making it an essential component of any security-conscious workflow.",
+                    "The tool works by creating a baseline hash of files in a specified directory, then periodically checking these files against the stored hashes to detect any unauthorized modifications. This makes it particularly useful for monitoring critical system files, configuration files, or any sensitive data that should remain unchanged.",
+                    "IntegrityCheck features a simple command-line interface that makes it accessible to both security professionals and regular users. It can be scheduled to run automatically at regular intervals, providing peace of mind that your important files haven't been tampered with."
+                ],
+                technologies: ["Python 3", "hashlib", "Cryptography", "SHA-256", "Command Line Interface"],
+                features: [
+                    "SHA-256 cryptographic hashing for maximum security",
+                    "Recursive directory scanning",
+                    "Baseline creation and comparison functionality",
+                    "Detailed reporting of file changes",
+                    "Configurable ignore list for files that are expected to change",
+                    "Simple command-line interface",
+                    "Cross-platform compatibility (Windows, Linux, macOS)"
+                ],
+                benefits: [
+                    "Early detection of unauthorized file modifications",
+                    "Peace of mind knowing your critical files are secure",
+                    "Simple to use with minimal configuration required",
+                    "Lightweight resource usage",
+                    "Can be automated to run on a schedule",
+                    "Helps maintain compliance with security standards",
+                    "Provides evidence for forensic analysis if needed"
+                ],
+                screenshots: [
+                    { src: "https://picsum.photos/seed/integritycheck1/1200/800.jpg", thumb: "https://picsum.photos/seed/integritycheck1/600/400.jpg", caption: "Main Interface" },
+                    { src: "https://picsum.photos/seed/integritycheck2/1200/800.jpg", thumb: "https://picsum.photos/seed/integritycheck2/600/400.jpg", caption: "Hash Generation Process" },
+                    { src: "https://picsum.photos/seed/integritycheck3/1200/800.jpg", thumb: "https://picsum.photos/seed/integritycheck3/600/400.jpg", caption: "Integrity Check Results" },
+                    { src: "https://picsum.photos/seed/integritycheck4/1200/800.jpg", thumb: "https://picsum.photos/seed/integritycheck4/600/400.jpg", caption: "Configuration Settings" }
+                ]
+            },
+            "edufinancehub": {
+                title: "EduFinanceHub",
+                category: "education management",
+                description: "A web application built to manage student records and their associated financial transactions.",
+                image: "https://picsum.photos/seed/edufinancehub/600/400.jpg",
+                githubUrl: "#",
+                liveUrl: "#",
+                info: [
+                    "EduFinanceHub is a comprehensive web application designed to streamline the management of student records and financial transactions in educational institutions. The system provides an intuitive interface for administrators, teachers, and students to access and manage relevant information.",
+                    "The application features robust security measures to protect sensitive student data, including encrypted storage of personal information and secure payment processing for financial transactions. It also generates detailed reports for administrators to track enrollment trends and financial performance.",
+                    "Built with modern web technologies, EduFinanceHub offers a responsive design that works seamlessly across desktop and mobile devices. The system can be customized to meet the specific needs of different educational institutions, from small tutoring centers to large universities."
+                ],
+                technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+                features: [
+                    "Student information management",
+                    "Financial transaction tracking",
+                    "Automated fee calculation",
+                    "Report generation",
+                    "User role-based access control",
+                    "Payment gateway integration",
+                    "Mobile-responsive design"
+                ],
+                benefits: [
+                    "Streamlined administrative processes",
+                    "Reduced paperwork and manual errors",
+                    "Improved communication with students",
+                    "Enhanced financial transparency",
+                    "Data-driven decision making",
+                    "Time and cost savings",
+                    "Scalable solution for growing institutions"
+                ],
+                screenshots: [
+                    { src: "https://picsum.photos/seed/edufinancehub1/1200/800.jpg", thumb: "https://picsum.photos/seed/edufinancehub1/600/400.jpg", caption: "Dashboard Overview" },
+                    { src: "https://picsum.photos/seed/edufinancehub2/1200/800.jpg", thumb: "https://picsum.photos/seed/edufinancehub2/600/400.jpg", caption: "Student Management" },
+                    { src: "https://picsum.photos/seed/edufinancehub3/1200/800.jpg", thumb: "https://picsum.photos/seed/edufinancehub3/600/400.jpg", caption: "Financial Records" },
+                    { src: "https://picsum.photos/seed/edufinancehub4/1200/800.jpg", thumb: "https://picsum.photos/seed/edufinancehub4/600/400.jpg", caption: "Report Generation" }
+                ]
+            },
+            "safecrypt": {
+                title: "SafeCrypt",
+                category: "encryption tool",
+                description: "A lightweight tool that allows users to encrypt and decrypt files or folders with ease.",
+                image: "https://picsum.photos/seed/safecrypt/600/400.jpg",
+                githubUrl: "#",
+                liveUrl: "#",
+                info: [
+                    "SafeCrypt is a user-friendly encryption tool designed to protect sensitive files and folders from unauthorized access. Using industry-standard AES encryption algorithms, SafeCrypt ensures that your data remains secure even if your device is lost or compromised.",
+                    "The application features a simple, intuitive interface that makes encryption accessible to users of all technical skill levels. With just a few clicks, you can encrypt individual files or entire folders, with the option to set a master password for additional security.",
+                    "SafeCrypt also includes features like secure file deletion, password strength assessment, and the ability to create self-extracting encrypted archives that can be shared with others who don't have the application installed."
+                ],
+                technologies: ["Python", "Cryptography", "AES", "Tkinter"],
+                features: [
+                    "AES-256 encryption",
+                    "File and folder encryption",
+                    "Password strength assessment",
+                    "Secure file deletion",
+                    "Self-extracting encrypted archives",
+                    "Cross-platform compatibility",
+                    "Intuitive user interface"
+                ],
+                benefits: [
+                    "Protection of sensitive data",
+                    "Compliance with data protection regulations",
+                    "Peace of mind when sharing files",
+                    "User-friendly encryption for non-technical users",
+                    "Secure deletion of sensitive files",
+                    "No technical knowledge required",
+                    "Works on all major operating systems"
+                ],
+                screenshots: [
+                    { src: "https://picsum.photos/seed/safecrypt1/1200/800.jpg", thumb: "https://picsum.photos/seed/safecrypt1/600/400.jpg", caption: "Main Interface" },
+                    { src: "https://picsum.photos/seed/safecrypt2/1200/800.jpg", thumb: "https://picsum.photos/seed/safecrypt2/600/400.jpg", caption: "Encryption Process" },
+                    { src: "https://picsum.photos/seed/safecrypt3/1200/800.jpg", thumb: "https://picsum.photos/seed/safecrypt3/600/400.jpg", caption: "Decryption Process" },
+                    { src: "https://picsum.photos/seed/safecrypt4/1200/800.jpg", thumb: "https://picsum.photos/seed/safecrypt4/600/400.jpg", caption: "Settings" }
+                ]
+            },
+            "backup": {
+                title: "Remote Backup Encryption Tool",
+                category: "backup utility",
+                description: "A Bash script that automates the process of creating encrypted backups of local directories and securely transferring them to a remote server.",
+                image: "https://picsum.photos/seed/backup/600/400.jpg",
+                githubUrl: "#",
+                liveUrl: "#",
+                info: [
+                    "The Remote Backup Encryption Tool is a powerful Bash script designed to automate the backup process for critical data. It creates encrypted backups of specified directories and securely transfers them to a remote server using SSH, ensuring that your data is protected both during transmission and at rest.",
+                    "This tool features incremental backup functionality, which means it only backs up files that have changed since the last backup, significantly reducing backup time and storage requirements. It also includes comprehensive logging and email notifications to keep you informed about the backup process.",
+                    "The script is highly configurable, allowing you to specify which directories to back up, encryption settings, remote server details, and scheduling preferences. It can be easily integrated with cron jobs for fully automated, scheduled backups."
+                ],
+                technologies: ["Bash", "SSH", "GPG", "Cron"],
+                features: [
+                    "Automated encrypted backups",
+                    "Incremental backup support",
+                    "Secure SSH transfer",
+                    "Configurable backup schedules",
+                    "Email notifications",
+                    "Comprehensive logging",
+                    "Remote server management"
+                ],
+                benefits: [
+                    "Automated backup process reduces manual effort",
+                    "Data encryption ensures security during transmission and storage",
+                    "Incremental backups save time and storage space",
+                    "Regular backups protect against data loss",
+                    "Email notifications keep you informed",
+                    "Configurable settings adapt to specific needs",
+                    "Open-source solution that can be customized"
+                ],
+                screenshots: [
+                    { src: "https://picsum.photos/seed/backup1/1200/800.jpg", thumb: "https://picsum.photos/seed/backup1/600/400.jpg", caption: "Configuration File" },
+                    { src: "https://picsum.photos/seed/backup2/1200/800.jpg", thumb: "https://picsum.photos/seed/backup2/600/400.jpg", caption: "Backup Process" },
+                    { src: "https://picsum.photos/seed/backup3/1200/800.jpg", thumb: "https://picsum.photos/seed/backup3/600/400.jpg", caption: "Log Output" },
+                    { src: "https://picsum.photos/seed/backup4/1200/800.jpg", thumb: "https://picsum.photos/seed/backup4/600/400.jpg", caption: "Email Notification" }
+                ]
+            },
+            "saadiwala": {
+                title: "SaadiWala.com",
+                category: "hotel booking",
+                description: "A live, fully functional web platform designed to help users book hotels and resorts or make quick inquiries online.",
+                image: "https://picsum.photos/seed/saadiwala/600/400.jpg",
+                githubUrl: "#",
+                liveUrl: "https://saadiwala.com",
+                info: [
+                    "SaadiWala.com is a comprehensive hotel booking platform that connects travelers with accommodations worldwide. The website features an intuitive search interface that allows users to find hotels based on location, dates, price range, and amenities, with real-time availability and pricing information.",
+                    "The platform includes advanced features like user reviews and ratings, detailed property information with high-quality images, secure online payment processing, and a booking management system for both guests and property owners. The responsive design ensures a seamless experience across all devices.",
+                    "For hotel owners, SaadiWala.com provides a dedicated dashboard to manage listings, update availability, process bookings, and analyze performance metrics. The platform also implements robust security measures to protect user data and prevent fraudulent activities."
+                ],
+                technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+                features: [
+                    "Advanced search and filtering",
+                    "Real-time availability and pricing",
+                    "Secure online payment processing",
+                    "User reviews and ratings",
+                    "Booking management system",
+                    "Property owner dashboard",
+                    "Mobile-responsive design"
+                ],
+                benefits: [
+                    "Convenient hotel booking experience",
+                    "Access to a wide range of accommodations",
+                    "Transparent pricing and reviews",
+                    "Secure payment processing",
+                    "Easy booking management",
+                    "Increased visibility for property owners",
+                    "24/7 customer support"
+                ],
+                screenshots: [
+                    { src: "https://picsum.photos/seed/saadiwala1/1200/800.jpg", thumb: "https://picsum.photos/seed/saadiwala1/600/400.jpg", caption: "Homepage" },
+                    { src: "https://picsum.photos/seed/saadiwala2/1200/800.jpg", thumb: "https://picsum.photos/seed/saadiwala2/600/400.jpg", caption: "Search Results" },
+                    { src: "https://picsum.photos/seed/saadiwala3/1200/800.jpg", thumb: "https://picsum.photos/seed/saadiwala3/600/400.jpg", caption: "Hotel Details" },
+                    { src: "https://picsum.photos/seed/saadiwala4/1200/800.jpg", thumb: "https://picsum.photos/seed/saadiwala4/600/400.jpg", caption: "Booking Process" }
+                ]
+            },
+            "autogitsync": {
+                title: "AutoGitSync",
+                category: "development tool",
+                description: "A Bash script designed to automate the process of synchronizing a local web project directory with a GitHub repository.",
+                image: "https://picsum.photos/seed/autogitsync/600/400.jpg",
+                githubUrl: "#",
+                liveUrl: "#",
+                info: [
+                    "AutoGitSync is a time-saving Bash script that automates the process of synchronizing local web projects with GitHub repositories. It eliminates the need for manual Git commands, making it easier for developers to maintain version control and backup their work.",
+                    "The script features intelligent file detection, only committing and pushing files that have changed since the last sync. It also includes conflict resolution options, branch management, and the ability to create automatic commits with descriptive messages based on the types of changes made.",
+                    "AutoGitSync can be easily configured to work with multiple projects and repositories, with customizable settings for commit messages, branch names, and sync frequency. It's particularly useful for solo developers or small teams who want to streamline their Git workflow."
+                ],
+                technologies: ["Bash", "Git", "GitHub API"],
+                features: [
+                    "Automated Git synchronization",
+                    "Intelligent change detection",
+                    "Conflict resolution options",
+                    "Branch management",
+                    "Customizable commit messages",
+                    "Multi-project support",
+                    "Detailed logging"
+                ],
+                benefits: [
+                    "Saves time by automating Git workflow",
+                    "Reduces human error in version control",
+                    "Consistent commit history",
+                    "Regular backups of work",
+                    "Easy to use for Git beginners",
+                    "Customizable to fit specific workflows",
+                    "Open-source and freely available"
+                ],
+                screenshots: [
+                    { src: "https://picsum.photos/seed/autogitsync1/1200/800.jpg", thumb: "https://picsum.photos/seed/autogitsync1/600/400.jpg", caption: "Configuration File" },
+                    { src: "https://picsum.photos/seed/autogitsync2/1200/800.jpg", thumb: "https://picsum.photos/seed/autogitsync2/600/400.jpg", caption: "Sync Process" },
+                    { src: "https://picsum.photos/seed/autogitsync3/1200/800.jpg", thumb: "https://picsum.photos/seed/autogitsync3/600/400.jpg", caption: "Log Output" },
+                    { src: "https://picsum.photos/seed/autogitsync4/1200/800.jpg", thumb: "https://picsum.photos/seed/autogitsync4/600/400.jpg", caption: "GitHub Integration" }
+                ]
+            }
+        };
+
         $(document).ready(function() {
             // Preloader
             $(window).on('load', function() {
@@ -2948,6 +3410,7 @@
             // Remove loading animation after page load
             setTimeout(() => {
                 $('.service-loading').removeClass('service-loading');
+                $('.project-card.loading').removeClass('loading');
             }, 2000);
             
             // Mobile scroll animation for services - Fixed
@@ -3023,4 +3486,3 @@
     </script>
 </body>
 </html>
-
