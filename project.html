@@ -723,9 +723,80 @@
             font-weight: bold;
         }
 
+        /* NEW: Project Download Section */
+        .project-download {
+            background-color: var(--color-bg);
+            padding: var(--spacing-xl) 0;
+        }
+
+        .download-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--color-card);
+            border-radius: 15px;
+            padding: var(--spacing-lg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+
+        .download-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(230, 0, 35, 0.1);
+        }
+
+        .download-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .download-icon {
+            font-size: 5rem;
+            color: var(--color-accent);
+            margin-right: var(--spacing-md);
+        }
+
+        .download-details h3 {
+            font-size: 2.2rem;
+            margin-bottom: var(--spacing-xs);
+            color: var(--color-text);
+        }
+
+        .download-details p {
+            margin: 0;
+            font-size: 1.6rem;
+            color: var(--color-text-secondary);
+        }
+
+        .download-details p span {
+            font-family: var(--font-mono);
+            color: var(--color-code-text);
+            background-color: var(--color-code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .btn--download {
+            background-color: #28a745; /* Green color for download */
+            color: #ffffff;
+            padding: 1.2rem 2.8rem;
+            font-size: 1.6rem;
+            border-radius: 0.4rem;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn--download:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.4);
+        }
+
         /* Project Screenshots Section */
         .project-screenshots {
-            background-color: var(--color-bg);
+            background-color: var(--color-bg-alt);
             padding: var(--spacing-xl) 0;
         }
 
@@ -975,143 +1046,6 @@
             transform: translateY(-5px);
         }
 
-        /* Modern Home Button */
-        .home-button {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-            transition: var(--transition);
-            cursor: pointer;
-            text-decoration: none;
-        }
-        
-        .home-button-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--color-accent), #ff0844);
-            border-radius: 50%;
-            box-shadow: 0 4px 15px rgba(230, 0, 35, 0.4);
-            transition: var(--transition);
-            overflow: hidden;
-        }
-        
-        .home-button-inner::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
-            opacity: 0;
-            transition: var(--transition);
-        }
-        
-        .home-button:hover .home-button-inner {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(230, 0, 35, 0.6);
-        }
-        
-        .home-button:hover .home-button-inner::before {
-            opacity: 1;
-        }
-        
-        .home-button i {
-            color: #ffffff;
-            font-size: 1.8rem;
-            z-index: 2;
-            transition: var(--transition);
-        }
-        
-        .home-button:hover i {
-            transform: translateY(-3px);
-        }
-        
-        /* Floating animation */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .home-button {
-            animation: float 4s ease-in-out infinite;
-        }
-        
-        /* Pulse animation */
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(230, 0, 35, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(230, 0, 35, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(230, 0, 35, 0); }
-        }
-        
-        .home-button-inner {
-            animation: pulse 2s infinite;
-        }
-        
-        /* Tooltip */
-        .home-tooltip {
-            position: absolute;
-            bottom: 70px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            color: #ffffff;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 1.4rem;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            z-index: 1000;
-            pointer-events: none;
-        }
-        
-        .home-tooltip::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 5px;
-            border-style: solid;
-            border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
-        }
-        
-        .home-button:hover .home-tooltip {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        /* Particles effect */
-        .home-particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        
-        .particle {
-            position: absolute;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-        }
-        
         /* Animations */
         .fade-in {
             opacity: 0;
@@ -1150,6 +1084,9 @@
         @media (max-width: 992px) {
             .project-details-container { grid-template-columns: 1fr; }
             .project-sidebar { grid-template-columns: repeat(2, 1fr); }
+            .download-container { flex-direction: column; text-align: center; gap: var(--spacing-md); }
+            .download-info { flex-direction: column; }
+            .download-icon { margin-right: 0; margin-bottom: var(--spacing-sm); }
         }
 
         @media (max-width: 768px) {
@@ -1187,8 +1124,6 @@
             .project-hero-title { margin-bottom: 2rem; }
             .project-hero-buttons { margin-bottom: 2rem; }
             .logo { font-size: 2rem; }
-            .home-button { width: 50px; height: 50px; bottom: 20px; left: 20px; }
-            .home-button i { font-size: 1.6rem; }
             .back-to-top { width: 45px; height: 45px; font-size: 1.6rem; bottom: 20px; right: 20px; }
             p { font-size: 1.7rem; line-height: 1.7; }
             .project-info p { padding: 1.2rem; margin-bottom: 1.5rem; }
@@ -1211,6 +1146,7 @@
                         <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="#project-hero" class="nav-link active">Project</a></li>
                         <li class="nav-item"><a href="#project-details" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="#project-download" class="nav-link">Download</a></li>
                         <li class="nav-item"><a href="#project-screenshots" class="nav-link">Screenshots</a></li>
                     </ul>
                 </nav>
@@ -1294,6 +1230,19 @@
         </div>
     </section>
 
+    <!-- # project download section
+    ================================================== -->
+    <section class="project-download section" id="project-download">
+        <div class="container container-wide">
+            <div class="section-title fade-in">
+                <h2 id="download-section-title">Get The Application</h2>
+            </div>
+            <div class="download-container fade-in" id="download-container">
+                <!-- Download content will be dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
     <!-- # project screenshots section
     ================================================== -->
     <section class="project-screenshots section" id="project-screenshots">
@@ -1360,16 +1309,6 @@
     <a href="#top" class="back-to-top" id="back-to-top">
         <i class="fas fa-arrow-up"></i>
     </a>
-    
-    <!-- # modern home button
-    ================================================== -->
-    <div class="home-button" id="home-button" onclick="goToHome()">
-        <div class="home-button-inner">
-            <i class="fas fa-home"></i>
-            <div class="home-particles" id="home-particles"></div>
-        </div>
-        <div class="home-tooltip">Back to Home</div>
-    </div>
 
     <!-- Java Script
     ================================================== -->
@@ -1378,40 +1317,54 @@
         // Project Data - यहाँ सभी प्रोजेक्ट्स का डेटा है
         const projectsData = {
             "integritycheck": {
-                title: "IntegrityCheck",
+                title: "Integrity Check Pro",
                 category: "security tool",
-                description: "A lightweight tool designed to maintain data integrity and detect file tampering using SHA-256 cryptographic hashing.",
+                description: "A professional GUI tool to calculate and verify SHA-256 file integrity, ensuring your data remains authentic and unaltered.",
                 githubUrl: "https://github.com/mrroot54/IntegrityCheck",
                 liveUrl: "",
                 info: [
-                    "IntegrityCheck is a powerful yet lightweight security tool designed to help users maintain the integrity of their important files and directories. By utilizing SHA-256 cryptographic hashing, this tool can detect even the smallest changes to files, making it an essential component of any security-conscious workflow.",
-                    "The tool works by creating a baseline hash of files in a specified directory, then periodically checking these files against the stored hashes to detect any unauthorized modifications. This makes it particularly useful for monitoring critical system files, configuration files, or any sensitive data that should remain unchanged.",
-                    "IntegrityCheck features a simple command-line interface that makes it accessible to both security professionals and regular users. It can be scheduled to run automatically at regular intervals, providing peace of mind that your important files haven't been tampered with."
+                    "Integrity Check Pro is a robust desktop application designed to provide absolute certainty over file integrity. In a digital world where data can be easily corrupted or tampered with, this tool serves as a critical line of defense, allowing users to verify that their files remain authentic and unaltered.",
+                    "The software operates on a simple yet powerful two-step process. First, it can generate a unique SHA-256 hash—a cryptographic digital fingerprint—for any file. Second, it can verify a file's current state against its original hash, instantly confirming whether the file is authentic or has been modified in any way.",
+                    "The user interface is built for simplicity and efficiency. A clean, modern dark theme reduces eye strain, while the dual-panel layout clearly separates the \"Create Hash\" and \"Verify Hash\" workflows. Users can interact with files effortlessly through either a convenient drag-and-drop zone or a traditional file browser, ensuring a fast and seamless experience. Real-time visual feedback, including a progress bar and status updates, keeps the user informed during every operation.",
+                    "Under the hood, Integrity Check Pro is engineered for performance and reliability. It leverages asynchronous processing to handle large files without interrupting the user experience, ensuring the application remains fully responsive. The application is built for universal access, with cross-platform compatibility for Windows, Linux, and macOS. For easy distribution, it can be packaged as a standalone executable, eliminating the need for users to install Python or any dependencies."
                 ],
-                technologies: ["Python 3", "hashlib", "Cryptography", "SHA-256", "Command Line Interface"],
+                technologies: ["Python 3", "tkinter", "tkinterdnd2", "hashlib", "threading", "setuptools", "PyInstaller", "Virtual Environment (venv)"],
                 features: [
-                    "SHA-256 cryptographic hashing for maximum security",
-                    "Recursive directory scanning",
-                    "Baseline creation and comparison functionality",
-                    "Detailed reporting of file changes",
-                    "Configurable ignore list for files that are expected to change",
-                    "Simple command-line interface",
-                    "Cross-platform compatibility (Windows, Linux, macOS)"
+                    "SHA-256 cryptographic hashing for robust file integrity validation.",
+                    "Intuitive dual-panel GUI for streamlined hash creation and verification workflows.",
+                    "Seamless drag-and-drop file integration for an efficient and modern user experience.",
+                    "Asynchronous processing to ensure a non-blocking, responsive user interface.",
+                    "Real-time progress visualization for monitoring long-running hashing tasks.",
+                    "Instantaneous file integrity verification against known hash values.",
+                    "Capability for bundling into a standalone executable for dependency-free distribution.",
+                    "Cross-platform compatibility (Windows, Linux, macOS)."
                 ],
                 benefits: [
-                    "Early detection of unauthorized file modifications",
-                    "Peace of mind knowing your critical files are secure",
-                    "Simple to use with minimal configuration required",
-                    "Lightweight resource usage",
-                    "Can be automated to run on a schedule",
-                    "Helps maintain compliance with security standards",
-                    "Provides evidence for forensic analysis if needed"
+                    "Early detection of unauthorized file modifications by instantly comparing current and original hash values.",
+                    "Peace of mind knowing your critical files are secure and have not been accidentally or maliciously altered.",
+                    "Simple to use with minimal configuration required, thanks to its intuitive drag-and-drop graphical interface.",
+                    "Lightweight resource usage ensures the application runs smoothly without slowing down your system.",
+                    "Can be automated to run on a schedule by integrating the core functionality into custom scripts.",
+                    "Helps maintain compliance with security standards by providing a reliable method for data integrity verification.",
+                    "Provides cryptographic evidence for forensic analysis if a security incident or data corruption needs to be investigated."
                 ],
+                // NEW: Download section data
+                download: {
+                    heading: "Get The Application",
+                    info: {
+                        os: "Linux",
+                        arch: "x64",
+                        version: "v2.1"
+                    },
+                    buttonText: "Download for Linux",
+                    // IMPORTANT: Replace this with your actual file link
+                    url: "https://github.com/mrroot54/IntegrityCheck/releases/download/v2.1/Integrity.Check.Pro" 
+                },
                 screenshots: [
-                    { src: "https://picsum.photos/seed/integritycheck1/1200/800.jpg", thumb: "https://picsum.photos/seed/integritycheck1/600/400.jpg", caption: "Main Interface" },
-                    { src: "https://picsum.photos/seed/integritycheck2/1200/800.jpg", thumb: "https://picsum.photos/seed/integritycheck2/600/400.jpg", caption: "Hash Generation Process" },
-                    { src: "https://picsum.photos/seed/integritycheck3/1200/800.jpg", thumb: "https://picsum.photos/seed/integritycheck3/600/400.jpg", caption: "Integrity Check Results" },
-                    { src: "https://picsum.photos/seed/integritycheck4/1200/800.jpg", thumb: "https://picsum.photos/seed/integritycheck4/600/400.jpg", caption: "Configuration Settings" }
+                    { src: "https://picsum.photos/seed/integritycheck-main/1200/800.jpg", thumb: "https://picsum.photos/seed/integritycheck-main/600/400.jpg", caption: "Main Application Interface" },
+                    { src: "https://picsum.photos/seed/integritycheck-hash/1200/800.jpg", thumb: "https://picsum.photos/seed/integritycheck-hash/600/400.jpg", caption: "Creating a File Hash" },
+                    { src: "https://picsum.photos/seed/integritycheck-verify/1200/800.jpg", thumb: "https://picsum.photos/seed/integritycheck-verify/600/400.jpg", caption: "Verifying File Integrity" },
+                    { src: "https://picsum.photos/seed/integritycheck-success/1200/800.jpg", thumb: "https://picsum.photos/seed/integritycheck-success/600/400.jpg", caption: "Successful Verification Result" }
                 ]
             },
             "edufinancehub": {
@@ -1444,6 +1397,7 @@
                     "Time and cost savings",
                     "Scalable solution for growing institutions"
                 ],
+                download: null, // No download for this project
                 screenshots: [
                     { src: "https://picsum.photos/seed/edufinancehub1/1200/800.jpg", thumb: "https://picsum.photos/seed/edufinancehub1/600/400.jpg", caption: "Dashboard Overview" },
                     { src: "https://picsum.photos/seed/edufinancehub2/1200/800.jpg", thumb: "https://picsum.photos/seed/edufinancehub2/600/400.jpg", caption: "Student Management" },
@@ -1481,6 +1435,7 @@
                     "No technical knowledge required",
                     "Works on all major operating systems"
                 ],
+                download: null, // No download for this project
                 screenshots: [
                     { src: "https://picsum.photos/seed/safecrypt1/1200/800.jpg", thumb: "https://picsum.photos/seed/safecrypt1/600/400.jpg", caption: "Main Interface" },
                     { src: "https://picsum.photos/seed/safecrypt2/1200/800.jpg", thumb: "https://picsum.photos/seed/safecrypt2/600/400.jpg", caption: "Encryption Process" },
@@ -1518,6 +1473,7 @@
                     "Configurable settings adapt to specific needs",
                     "Open-source solution that can be customized"
                 ],
+                download: null, // No download for this project
                 screenshots: [
                     { src: "https://picsum.photos/seed/backup1/1200/800.jpg", thumb: "https://picsum.photos/seed/backup1/600/400.jpg", caption: "Configuration File" },
                     { src: "https://picsum.photos/seed/backup2/1200/800.jpg", thumb: "https://picsum.photos/seed/backup2/600/400.jpg", caption: "Backup Process" },
@@ -1555,6 +1511,7 @@
                     "Increased visibility for property owners",
                     "24/7 customer support"
                 ],
+                download: null, // No download for this project
                 screenshots: [
                     { src: "https://picsum.photos/seed/saadiwala1/1200/800.jpg", thumb: "https://picsum.photos/seed/saadiwala1/600/400.jpg", caption: "Homepage" },
                     { src: "https://picsum.photos/seed/saadiwala2/1200/800.jpg", thumb: "https://picsum.photos/seed/saadiwala2/600/400.jpg", caption: "Search Results" },
@@ -1592,6 +1549,7 @@
                     "Customizable to fit specific workflows",
                     "Open-source and freely available"
                 ],
+                download: null, // No download for this project
                 screenshots: [
                     { src: "https://picsum.photos/seed/autogitsync1/1200/800.jpg", thumb: "https://picsum.photos/seed/autogitsync1/600/400.jpg", caption: "Configuration File" },
                     { src: "https://picsum.photos/seed/autogitsync2/1200/800.jpg", thumb: "https://picsum.photos/seed/autogitsync2/600/400.jpg", caption: "Sync Process" },
@@ -1612,7 +1570,6 @@
             const project = projectsData[projectId];
             
             if (!project) {
-                // Project not found, load default
                 loadProject('integritycheck');
                 return;
             }
@@ -1653,6 +1610,28 @@
             // Update benefits
             const benefitHtml = project.benefits.map(benefit => `<li>${benefit}</li>`).join('');
             document.getElementById('benefit-list').innerHTML = benefitHtml;
+
+            // --- NEW: Update Download Section ---
+            if (project.download) {
+                document.getElementById('download-section-title').textContent = project.download.heading;
+                const downloadHtml = `
+                    <div class="download-info">
+                        <i class="fas fa-desktop download-icon"></i>
+                        <div class="download-details">
+                            <h3>${project.title}</h3>
+                            <p>OS: <span>${project.download.info.os}</span> | Arch: <span>${project.download.info.arch}</span> | Version: <span>${project.download.info.version}</span></p>
+                        </div>
+                    </div>
+                    <a href="${project.download.url}" class="btn btn--download" target="_blank">
+                        <i class="fas fa-download"></i> ${project.download.buttonText}
+                    </a>
+                `;
+                document.getElementById('download-container').innerHTML = downloadHtml;
+                document.getElementById('project-download').style.display = 'block'; // Show the section
+            } else {
+                // Hide the download section if no download data is available
+                document.getElementById('project-download').style.display = 'none';
+            }
             
             // Update screenshots
             const screenshotsHtml = project.screenshots.map((screenshot, index) => `
@@ -1671,13 +1650,7 @@
             }, 100);
         }
 
-        // Direct function for home button click
-        function goToHome() {
-            window.location.href = 'index.html';
-        }
-
         $(document).ready(function() {
-            // Load project based on URL parameter
             const projectId = getProjectId();
             loadProject(projectId);
             
@@ -1687,7 +1660,6 @@
                 $('#nav').toggleClass('active');
             });
             
-            // Close mobile menu when clicking on a link
             $('.nav-link').on('click', function() {
                 $('#mobile-menu-toggle').removeClass('active');
                 $('#nav').removeClass('active');
