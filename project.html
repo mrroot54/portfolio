@@ -208,6 +208,19 @@
             padding: 0.8rem 1.6rem;
             font-size: 1.4rem;
         }
+        
+        /* NEW: Secondary Button Style */
+        .btn--secondary {
+            background-color: #007bff; /* A nice blue color */
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn--secondary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+        }
 
         /* Container */
         .container {
@@ -1112,7 +1125,7 @@
             .container { padding: 0 var(--spacing-sm); }
             .section { padding: var(--spacing-lg) 0; }
             h1 { font-size: clamp(2.8rem, 7vw, 4.8rem); }
-            h2 { font-size: clamp(2.4rem, 6vw, 3.6rem); }
+            h2 { font-size:  clamp(2.4rem, 6vw, 3.6rem); }
             h3 { font-size: clamp(2rem, 5vw, 2.8rem); }
             h4 { font-size: clamp(1.8rem, 4vw, 2.2rem); }
             .screenshots-container { grid-template-columns: 1fr; }
@@ -1253,6 +1266,13 @@
             
             <div class="screenshots-container" id="screenshots-container">
                 <!-- Screenshots will be dynamically loaded -->
+            </div>
+            
+            <!-- NEW: Download All Button -->
+            <div class="section-title fade-in" style="margin-top: var(--spacing-md);">
+                <button id="download-all-btn" class="btn btn--secondary" style="display: none;">
+                    <i class="fas fa-download"></i> Download All Screenshots
+                </button>
             </div>
         </div>
     </section>
@@ -1512,7 +1532,7 @@
                 download: null, // No download for this project
                 screenshots: [
                     { src: "https://picsum.photos/seed/backup1/1200/800.jpg", thumb: "https://picsum.photos/seed/backup1/600/400.jpg", caption: "Configuration File" },
-                    { src: "https://picsum.photos/seed/backup2/1200/800.jpg", thumb: "https://picsum.photos/seed/backup2/600/400.jpg", caption: "Backup Process" },
+                    { src: "https://picsum.photos/seed/https://picsum.photos/seed/backup2/1200/800.jpg", thumb: "https://picsum.photos/seed/backup2/600/400.jpg", caption: "Backup Process" },
                     { src: "https://picsum.photos/seed/backup3/1200/800.jpg", thumb: "https://picsum.photos/seed/backup3/600/400.jpg", caption: "Log Output" },
                     { src: "https://picsum.photos/seed/backup4/1200/800.jpg", thumb: "https://picsum.photos/seed/backup4/600/400.jpg", caption: "Email Notification" }
                 ]
@@ -1601,6 +1621,29 @@
             return urlParams.get('project') || 'integritycheck'; // Default project
         }
 
+        // Function to download all images without opening them in the browser
+        function downloadAllImages(screenshots) {
+            screenshots.forEach((screenshot, index) => {
+                setTimeout(() => {
+                    // Create a temporary anchor (<a>) element
+                    const link = document.createElement('a');
+                    
+                    // Set the image URL as the href
+                    link.href = screenshot.src;
+                    
+                    // IMPORTANT: The 'download' attribute forces the browser to download the file
+                    // instead of navigating to it. This prevents the image from opening in a new tab.
+                    link.download = `${screenshot.caption.replace(/\s+/g, '_')}_${index + 1}.jpeg`;
+                    
+                    // Append the link to the body, click it, and then remove it.
+                    // This is a standard trick to trigger downloads programmatically.
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }, index * 500); // 500ms delay between each download
+            });
+        }
+
         // Load project data
         function loadProject(projectId) {
             const project = projectsData[projectId];
@@ -1678,6 +1721,14 @@
             `).join('');
             document.getElementById('screenshots-container').innerHTML = screenshotsHtml;
             
+            // --- NEW: Show/Hide Download All Button ---
+            const downloadAllBtn = document.getElementById('download-all-btn');
+            if (project.screenshots && project.screenshots.length > 0) {
+                downloadAllBtn.style.display = 'inline-flex';
+            } else {
+                downloadAllBtn.style.display = 'none';
+            }
+
             // Re-initialize animations for new content
             setTimeout(() => {
                 $('.fade-in').each(function() {
@@ -1883,6 +1934,15 @@
                     else { navigateToImage(currentImageIndex - 1); }
                 }
             }
+
+            // --- NEW: Event Listener for Download All Button ---
+            $('#download-all-btn').on('click', function() {
+                const projectId = getProjectId();
+                const project = projectsData[projectId];
+                if (project && project.screenshots) {
+                    downloadAllImages(project.screenshots);
+                }
+            });
         });
     </script>
 </body>
